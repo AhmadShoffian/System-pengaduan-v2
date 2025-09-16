@@ -40,7 +40,7 @@
 
 <body class="index-page">
 
-    <header id="header" class="header d-flex align-items-center fixed-top">
+    {{-- <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
             <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
@@ -83,19 +83,81 @@
 
 
 
-            <div class="auth-buttons">
+          
                 <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
-                <a class="btn-getstarted" href="{{ route('register') }}">Buat Akun</a>
+        </div>
+    </header> --}}
+
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+            <!-- Logo -->
+            <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+                <h1 class="sitename">GP</h1>
+                <span>.</span>
+            </a>
+
+            <!-- Navigation -->
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="#hero" class="active">Home<br></a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Cara Melapor</a></li>
+                    <li><a href="#team">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+
+            <!-- Dropdown User -->
+            <div class="dropdown order-0 order-xl-2 ms-3 ms-xl-0">
+                <a href="#" class="d-flex align-items-center text-decoration-none" id="userDropdown">
+                    <i class="bi bi-person-circle fs-3 text-white"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="">Ubah Profile</a></li>
+                    <li>
+                        <form method="POST" action="">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
+
         </div>
     </header>
+
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            margin-top: 10px;
+        }
+
+        .dropdown.show .dropdown-menu {
+            display: block;
+        }
+    </style>
+
+    <script>
+        document.getElementById('userDropdown').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.parentElement.classList.toggle('show');
+        });
+    </script>
+
+
+
 
     <main class="main">
 
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
 
-            <img src="assets/img/triark.jpg" alt="" data-aos="fade-in">
+            <img src="../assets/img/triark.jpg" alt="" data-aos="fade-in">
 
             <div class="container">
 
@@ -114,7 +176,7 @@
 
                 <div class="text-center" data-aos="fade-up" data-aos-delay="200">
 
-                    <a href="#" class="btn btn-primary">Buat Akun</a>
+                    <a href="#" class="btn btn-primary">Buat Pengaduan</a>
                 </div>
 
                 <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">
@@ -161,7 +223,7 @@
 
                 <div class="row gy-4">
                     <div class="col-lg-6 order-1 order-lg-2">
-                        <img src="assets/img/about.jpg" class="img-fluid" alt="">
+                        <img src="../assets/img/about.jpg" class="img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 order-2 order-lg-1 content">
                         <h3>Unsur Pegaduan</h3>
@@ -264,18 +326,24 @@
 
                 <div class="row gy-4">
                     <div class="features-image col-lg-6 pe-4" data-aos="fade-up" data-aos-delay="100"><img
-                            src="assets/img/features-bg.jpg" alt=""></div>
+                            src="../assets/img/features-bg.jpg" alt=""></div>
 
                     <div class="col-lg-6 order-2 order-lg-1 content ps-4">
                         <h3>Kerahasiaan Pelapor</h3>
                         <p class="fst-italic">
-                           Institut Seni Indeonesia Yogyakarta akan merahasiakan identitas pribadi Anda sebagai whistleblower karena ISI Yogyakarta hanya fokus pada informasi Anda laporkan. <br>
-                           Agar Kerahasiaan lebih terjaga, perhatikan hal-hal berikut ini :
+                            Institut Seni Indeonesia Yogyakarta akan merahasiakan identitas pribadi Anda sebagai
+                            whistleblower karena ISI Yogyakarta hanya fokus pada informasi Anda laporkan. <br>
+                            Agar Kerahasiaan lebih terjaga, perhatikan hal-hal berikut ini :
                         </p>
                         <ul>
-                            <li><i class="bi bi-check2-all"></i> <span>Jika ingin identitas Anda tetap rahasia, jangan memberitahukan/mengisi data-data pribadi, seperti nama Anda, atau hubungan Anda dengan pelaku-pelaku.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>Jangan memberitahukan / mengisikan data-data / informasi yang memungkinkan bagi orang lain untuk melakukan pelacakan siapa Anda.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>Hindari orang lain mengetahui nama samaran (username), kata sandi (password) serta nomor registrasi Anda.</span></li>
+                            <li><i class="bi bi-check2-all"></i> <span>Jika ingin identitas Anda tetap rahasia, jangan
+                                    memberitahukan/mengisi data-data pribadi, seperti nama Anda, atau hubungan Anda
+                                    dengan pelaku-pelaku.</span></li>
+                            <li><i class="bi bi-check2-all"></i> <span>Jangan memberitahukan / mengisikan data-data /
+                                    informasi yang memungkinkan bagi orang lain untuk melakukan pelacakan siapa
+                                    Anda.</span></li>
+                            <li><i class="bi bi-check2-all"></i> <span>Hindari orang lain mengetahui nama samaran
+                                    (username), kata sandi (password) serta nomor registrasi Anda.</span></li>
                         </ul>
                         <p>
                             Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
@@ -393,7 +461,7 @@
         <!-- Call To Action Section -->
         <section id="call-to-action" class="call-to-action section dark-background">
 
-            <img src="assets/img/cta-bg.jpg" alt="">
+            <img src="../assets/img/cta-bg.jpg" alt="">
 
             <div class="container">
                 <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
@@ -435,12 +503,12 @@
                     <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>App 1</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -449,12 +517,12 @@
                         </div><!-- End Portfolio Item -->
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Product 1</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1"
                                     data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -463,12 +531,12 @@
                         </div><!-- End Portfolio Item -->
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Branding 1</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1"
                                     data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -477,12 +545,12 @@
                         </div><!-- End Portfolio Item -->
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>App 2</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -491,12 +559,12 @@
                         </div><!-- End Portfolio Item -->
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Product 2</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2"
                                     data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -505,12 +573,12 @@
                         </div><!-- End Portfolio Item -->
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Branding 2</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2"
                                     data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -519,12 +587,12 @@
                         </div><!-- End Portfolio Item -->
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>App 3</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3"
                                     data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -533,12 +601,12 @@
                         </div><!-- End Portfolio Item -->
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Product 3</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3"
                                     data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -547,12 +615,12 @@
                         </div><!-- End Portfolio Item -->
 
                         <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid"
+                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid"
                                 alt="">
                             <div class="portfolio-info">
                                 <h4>Branding 3</h4>
                                 <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2"
+                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2"
                                     data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
                                         class="bi bi-zoom-in"></i></a>
                                 <a href="portfolio-details.html" title="More Details" class="details-link"><i
@@ -576,7 +644,7 @@
                 <div class="row gy-4 align-items-center justify-content-between">
 
                     <div class="col-lg-5">
-                        <img src="assets/img/stats-img.jpg" alt="" class="img-fluid">
+                        <img src="../assets/img/stats-img.jpg" alt="" class="img-fluid">
                     </div>
 
                     <div class="col-lg-6">
@@ -646,7 +714,7 @@
         <!-- Testimonials Section -->
         <section id="testimonials" class="testimonials section dark-background">
 
-            <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
+            <img src="../assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -691,7 +759,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img"
+                                <img src="../assets/img/testimonials/testimonials-2.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>Sara Wilsson</h3>
                                 <h4>Designer</h4>
@@ -712,7 +780,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img"
+                                <img src="../assets/img/testimonials/testimonials-3.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>Jena Karlis</h3>
                                 <h4>Store Owner</h4>
@@ -733,7 +801,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
+                                <img src="../assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>Matt Brandon</h3>
                                 <h4>Freelancer</h4>
@@ -754,7 +822,7 @@
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
+                                <img src="../assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
                                     alt="">
                                 <h3>John Larson</h3>
                                 <h4>Entrepreneur</h4>
@@ -798,7 +866,7 @@
                         data-aos-delay="100">
                         <div class="team-member">
                             <div class="member-img">
-                                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                                <img src="../assets/img/team/team-1.jpg" class="img-fluid" alt="">
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter-x"></i></a>
                                     <a href=""><i class="bi bi-facebook"></i></a>
@@ -817,7 +885,7 @@
                         data-aos-delay="200">
                         <div class="team-member">
                             <div class="member-img">
-                                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                                <img src="../assets/img/team/team-2.jpg" class="img-fluid" alt="">
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter-x"></i></a>
                                     <a href=""><i class="bi bi-facebook"></i></a>
@@ -836,7 +904,7 @@
                         data-aos-delay="300">
                         <div class="team-member">
                             <div class="member-img">
-                                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                                <img src="../assets/img/team/team-3.jpg" class="img-fluid" alt="">
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter-x"></i></a>
                                     <a href=""><i class="bi bi-facebook"></i></a>
@@ -855,7 +923,7 @@
                         data-aos-delay="400">
                         <div class="team-member">
                             <div class="member-img">
-                                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                                <img src="../assets/img/team/team-4.jpg" class="img-fluid" alt="">
                                 <div class="social">
                                     <a href=""><i class="bi bi-twitter-x"></i></a>
                                     <a href=""><i class="bi bi-facebook"></i></a>
