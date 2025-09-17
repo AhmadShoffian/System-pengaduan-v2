@@ -176,7 +176,7 @@
 
                 <div class="text-center" data-aos="fade-up" data-aos-delay="200">
 
-                    <a href="#" class="btn btn-primary">Buat Pengaduan</a>
+                    <a href="{{ route('pengaduan.create.step.one') }}" class="btn btn-primary">Buat Pengaduan</a>
                 </div>
 
                 <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">

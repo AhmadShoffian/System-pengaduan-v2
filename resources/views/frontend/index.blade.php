@@ -25,6 +25,7 @@
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
@@ -269,13 +270,19 @@
                     <div class="col-lg-6 order-2 order-lg-1 content ps-4">
                         <h3>Kerahasiaan Pelapor</h3>
                         <p class="fst-italic">
-                           Institut Seni Indeonesia Yogyakarta akan merahasiakan identitas pribadi Anda sebagai whistleblower karena ISI Yogyakarta hanya fokus pada informasi Anda laporkan. <br>
-                           Agar Kerahasiaan lebih terjaga, perhatikan hal-hal berikut ini :
+                            Institut Seni Indeonesia Yogyakarta akan merahasiakan identitas pribadi Anda sebagai
+                            whistleblower karena ISI Yogyakarta hanya fokus pada informasi Anda laporkan. <br>
+                            Agar Kerahasiaan lebih terjaga, perhatikan hal-hal berikut ini :
                         </p>
                         <ul>
-                            <li><i class="bi bi-check2-all"></i> <span>Jika ingin identitas Anda tetap rahasia, jangan memberitahukan/mengisi data-data pribadi, seperti nama Anda, atau hubungan Anda dengan pelaku-pelaku.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>Jangan memberitahukan / mengisikan data-data / informasi yang memungkinkan bagi orang lain untuk melakukan pelacakan siapa Anda.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>Hindari orang lain mengetahui nama samaran (username), kata sandi (password) serta nomor registrasi Anda.</span></li>
+                            <li><i class="bi bi-check2-all"></i> <span>Jika ingin identitas Anda tetap rahasia, jangan
+                                    memberitahukan/mengisi data-data pribadi, seperti nama Anda, atau hubungan Anda
+                                    dengan pelaku-pelaku.</span></li>
+                            <li><i class="bi bi-check2-all"></i> <span>Jangan memberitahukan / mengisikan data-data /
+                                    informasi yang memungkinkan bagi orang lain untuk melakukan pelacakan siapa
+                                    Anda.</span></li>
+                            <li><i class="bi bi-check2-all"></i> <span>Hindari orang lain mengetahui nama samaran
+                                    (username), kata sandi (password) serta nomor registrasi Anda.</span></li>
                         </ul>
                         <p>
                             Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
@@ -413,160 +420,381 @@
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio section">
-
-            <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
-                <h2>Portfolio</h2>
-                <p>Check our Portfolio</p>
-            </div><!-- End Section Title -->
-
-            <div class="container">
-
-                <div class="isotope-layout" data-default-filter="*" data-layout="masonry"
-                    data-sort="original-order">
-
-                    <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">App</li>
-                        <li data-filter=".filter-product">Card</li>
-                        <li data-filter=".filter-branding">Web</li>
-                    </ul><!-- End Portfolio Filters -->
-
-                    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>App 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1"
-                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Product 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1"
-                                    data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Branding 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1"
-                                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>App 2</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2"
-                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Product 2</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2"
-                                    data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Branding 2</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2"
-                                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>App 3</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3"
-                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Product 3</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3"
-                                    data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Branding 3</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2"
-                                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
-                            </div>
-                        </div><!-- End Portfolio Item -->
-
-                    </div><!-- End Portfolio Container -->
-
-                </div>
-
+            {{-- <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-gray-50 p-4 sm:p-6">
+            
+            </div> --}}
+             <div class="container section-title" data-aos="fade-up">
+                <h2>Cara Melapor</h2>
+                <p>Tata Cara Melapor</p>
             </div>
+            <div class="container">
+                <div class="row gy-4">
+                    <div class="max-w-8xl mx-auto">
+                        <div class="shadow-xl border-0 bg-white/80 backdrop-blur-sm rounded-xl">
+                            <!-- Header -->
+                            <div class="pb-6 p-6">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                                            <path d="M20 17V4H8a2 2 0 00-2 2v13" />
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h2
+                                            class="text-2xl bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
+                                            Cara Melapor</h2>
+                                        <p class="text-gray-500 mt-1">Panduan lengkap untuk mengajukan pengaduan</p>
+                                    </div>
+                                </div>
+                                <hr class="mt-4 border-gray-200" />
+                            </div>
+        
+                            <!-- Content -->
+                            <div class="p-6 space-y-6">
+        
+                                <!-- STEP TEMPLATE -->
+                                <!-- Step {N} -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            1</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon Login -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                    <path d="M12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Login ke Sistem</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Klik tombol "Login", lalu isikan
+                                            Username dan Password Anda</p>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 2 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            2</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon User -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                                    <path d="M12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Registrasi (Jika Belum Terdaftar)</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">
+                                            Jika Anda belum terdaftar, klik tombol "Register" dan isikan data diri Anda lalu
+                                            klik tombol "Register", maka Anda akan otomatis login ke Aplikasi
+                                        </p>
+                                        <ul class="mt-3 ml-11 space-y-2">
+                                            <li class="flex items-start gap-3 text-gray-600">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
+                                                <span>Buat Nama Samaran (username) dan Kata Sandi (password) yang Anda ketahui
+                                                    sendiri</span>
+                                            </li>
+                                            <li class="flex items-start gap-3 text-gray-600">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
+                                                <span>Gunakan nama yang unik dan tidak menggambarkan identitas Anda</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 3 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            3</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon Chat -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Akses Menu Pengaduan</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Klik menu "Pengaduan" untuk memulai
+                                            pengaduan baru</p>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 4 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            4</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon File -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8l-6-6H7z" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Tambah Pengaduan Baru</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Klik tombol "Tambah Pengaduan" untuk
+                                            menambahkan pengaduan baru</p>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 5 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            5</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon Form -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M12 4v16m8-8H4" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Isi Form Pengaduan</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Isi form Tambah Pengaduan sesuai
+                                            informasi yang diperlukan, lalu klik tombol "Lanjut"</p>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 6 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            6</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon Alert -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M12 9v2m0 4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Perhatikan Ketentuan</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Perhatikan baik-baik beberapa hal di
+                                            bawah ini</p>
+                                        <ul class="mt-3 ml-11 space-y-2">
+                                            <li class="flex items-start gap-3 text-gray-600">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
+                                                <span>Semua kolom yang diberi tanda (*) wajib diisi</span>
+                                            </li>
+                                            <li class="flex items-start gap-3 text-gray-600">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
+                                                <span>Pastikan informasi yang diberikan benar dan lengkap memenuhi unsur <span
+                                                        class="bg-gray-100 px-2 py-0.5 rounded border text-sm">4W +
+                                                        1H</span></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 7 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            7</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon Upload -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
+                                                    <path d="M12 12V4m0 0l-4 4m4-4l4 4" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Upload Bukti Pendukung</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Jika anda memiliki bukti dalam bentuk
+                                            file seperti foto atau dokumen lain, silahkan dilengkapi di halaman selanjutnya</p>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 8 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            8</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon FileCheck -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M9 12l2 2 4-4" />
+                                                    <path d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8l-6-6H7z" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Konfirmasi Lampiran</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Catatan:</p>
+                                        <ul class="mt-3 ml-11 space-y-2">
+                                            <li class="flex items-start gap-3 text-gray-600">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
+                                                <span>Setelah membaca petunjuk untuk menyertakan lampiran</span>
+                                            </li>
+                                            <li class="flex items-start gap-3 text-gray-600">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
+                                                <span>Klik kotak kecil di bawah petunjuk tersebut, dan lanjutkan
+                                                    prosesnya</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 9 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            9</div>
+                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon Send -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M4 4l16 8-16 8V4z" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Kirim Pengaduan</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Setelah selesai mengisi, silahkan klik
+                                            tombol "Kirim" untuk melanjutkan atau klik tombol "Hapus" untuk membatalkan proses
+                                            pelaporan anda</p>
+                                    </div>
+                                </div>
+        
+                                <!-- Step 10 -->
+                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
+                                    <div class="flex flex-col items-center">
+                                        <div
+                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
+                                            10</div>
+                                    </div>
+                                    <div class="pb-4">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <div
+                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
+                                                <!-- Icon Check -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path d="M5 13l4 4L19 7" />
+                                                </svg>
+                                            </div>
+                                            <h3 class="font-semibold text-gray-900">Cetak Nomor Register</h3>
+                                        </div>
+                                        <p class="text-gray-700 leading-relaxed ml-11">Halaman berikutnya memberikan kesempatan
+                                            bagi anda yang ingin mencetak nomor register pengaduan</p>
+                                    </div>
+                                </div>
+        
+                                <!-- Important Notes -->
+                                <hr class="my-8 border-gray-200" />
+                                <div
+                                    class="rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-6">
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-600" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path d="M12 9v2m0 4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z" />
+                                        </svg>
+                                        <h4 class="text-lg font-semibold text-amber-800">Penting untuk Diingat</h4>
+                                    </div>
+                                    <ul class="space-y-3 text-amber-900">
+                                        <li class="flex items-start gap-3">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
+                                            <span class="font-semibold">Catat dan simpan dengan baik Nama Samaran (username)
+                                                dan Kata Sandi (password)</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
+                                            <span class="font-semibold">Simpan dengan baik nomor register pengaduan dan jangan
+                                                sampai hilang untuk mengetahui status!</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
+                                            <span>Tindak lanjut pengaduan yang Anda sampaikan.</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
+                                            <span>Kementerian Kesehatan akan mengirimkan respon atas laporan Anda melalui
+                                                saluran yang telah Anda cantumkan dalam Form Pengaduan.</span>
+                                        </li>
+                                        <li class="flex items-start gap-3">
+                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
+                                            <span>Apabila pengaduan yang Anda sampaikan belum memenuhi kriteria untuk
+                                                ditindaklanjuti.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        </section><!-- /Portfolio Section -->
+
+
+
+
 
         <!-- Stats Section -->
         <section id="stats" class="stats section">
