@@ -13,4 +13,9 @@ class Unit extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function pengaduan()
+    {
+        return $this->hasMany(\App\Models\Pengaduan::class, 'unit_id');
+    }
 }

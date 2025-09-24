@@ -85,8 +85,8 @@
 
 
             <div class="auth-buttons">
-                <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
-                <a class="btn-getstarted" href="{{ route('register') }}">Buat Akun</a>
+                <a class="btn-getstarted" href="{{ route('signin') }}">Login</a>
+                <a class="btn-getstarted" href="{{ route('signup') }}">Buat Akun</a>
             </div>
         </div>
     </header>

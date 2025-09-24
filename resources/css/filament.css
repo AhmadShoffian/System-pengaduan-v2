@@ -1,0 +1,8 @@
+/* Samakan tinggi semua chart di dashboard */
+.fi-wi-chart {
+    height: 300px !important;
+}
+
+.fi-wi-chart canvas {
+    height: 300px !important;
+}

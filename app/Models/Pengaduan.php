@@ -20,12 +20,20 @@ class Pengaduan extends Model
         'regency_id',
         'uraian',
         'pelapor_id',
-        'pengaduan_file'
-        // 'nama',
-        // 'nip',
-        // 'unit',
-        // 'jabatan'
+        'nomor_registrasi', 
+        'status',           
     ];
+
+    protected static function booted()
+    {
+        static::creating(function ($pengaduan) {
+            // Nomor registrasi acak 8 digit dengan prefix
+            $pengaduan->nomor_registrasi = 'REG' . mt_rand(10000000, 99999999);
+
+            // Status default
+            $pengaduan->status = 'Draft';
+        });
+    }
 
     public function files()
     {
@@ -34,6 +42,21 @@ class Pengaduan extends Model
 
     public function pelapor()
     {
-        return $this->hasMany(Pelapor::class);
+        return $this->hasMany(Pelapor::class, 'pengaduan_id');
+    }
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class, 'regency_id');
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'unit_id');
     }
 }

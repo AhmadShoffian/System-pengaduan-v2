@@ -11,6 +11,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" />
+
+    <!-- jQuery (wajib untuk DataTables) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+
 </head>
 
 <body class="bg-gray-200">
@@ -46,13 +56,13 @@
         <!-- Items -->
         <div class="p-4 space-y-4">
             <!-- Inicio -->
-            <a href="#" aria-label="dashboard"
+            <a href="{{ route('pengaduan.index') }}" aria-label="dashboard"
                 class="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400">
                 <i class="fas fa-home text-white"></i>
-                <span class="-mr-1 font-medium">Inicio</span>
+                <span class="-mr-1 font-medium">Pengaduan</span>
             </a>
 
-            <a href="#" class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group">
+            {{-- <a href="#" class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group">
                 <i class="fas fa-wallet"></i>
                 <span>Billetera</span>
             </a>
@@ -67,7 +77,7 @@
             <a href="#" class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Cerrar sesión</span>
-            </a>
+            </a> --}}
         </div>
     </div>
 
@@ -75,7 +85,7 @@
         <!-- Header -->
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="text-secondary fw-bold">Transacciones</h2>
-            <a href="" class="btn btn-primary d-flex align-items-center gap-2">
+            <a href="{{ route('pengaduan.create.step.one') }}" class="btn btn-primary d-flex align-items-center gap-2">
                 <i class="fas fa-plus"></i> Tambah
             </a>
         </div>
@@ -89,7 +99,7 @@
 
             <div class="card-body p-0">
                 <div class="overflow-x-auto">
-                    <table class="table table-hover mb-0 align-middle w-full">
+                    <table id="pengaduanTable" class="table table-hover mb-0 align-middle w-full">
                         <thead class="table-light text-uppercase text-muted small">
                             <tr>
                                 <th class="text-center">No</th>
@@ -97,7 +107,6 @@
                                 <th>Alamat Kejadian</th>
                                 <th>Waktu Kejadian</th>
                                 <th>Uraian</th>
-                                <th>Nama</th>
                                 <th class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -109,16 +118,22 @@
                                     <td>{{ $item->alamat_kejadian }}</td>
                                     <td>{{ $item->waktu_kejadian }}</td>
                                     <td>{{ $item->uraian }}</td>
-                                    <td>{{ $item->nama }}</td>
                                     <td class="text-center">
-                                        <a href="" class="btn btn-sm btn-warning me-1" title="Edit">
+                                        <a href="{{ route('pengaduan.show', $item->id) }}"
+                                            class="btn btn-sm btn-info me-1" title="Detail">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{{ route('pengaduan.edit.step.one', $item->id) }}"
+                                            class="btn btn-sm btn-warning me-1" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form action="" method="POST" class="d-inline">
+
+                                        <form action="{{ route('pengaduan.destroy', $item->id) }}" method="POST"
+                                            class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Yakin hapus?')" title="Hapus">
+                                                onclick="return confirm('Yakin hapus data ini?')" title="Hapus">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
@@ -136,6 +151,7 @@
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -152,6 +168,24 @@
             sideNav.classList.toggle('hidden');
         });
     </script>
+    <script>
+        $(document).ready(function() {
+            $('#pengaduanTable').DataTable({
+                paging: true,
+                searching: true,
+                ordering: true,
+                lengthMenu: [5, 10, 25, 50],
+                language: {
+                    url: "https://cdn.datatables.net/plug-ins/2.2.2/i18n/id.json"
+                },
+                columnDefs: [{
+                    orderable: false,
+                    targets: [5]
+                }]
+            });
+        });
+    </script>
+
 </body>
 
 </html>

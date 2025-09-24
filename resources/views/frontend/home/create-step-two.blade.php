@@ -329,10 +329,10 @@
             <a href="#" aria-label="dashboard"
                 class="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400">
                 <i class="fas fa-home text-white"></i>
-                <span class="-mr-1 font-medium">Inicio</span>
+                <span class="-mr-1 font-medium">Pengaduan</span>
             </a>
 
-            <a href="#" class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group">
+            {{-- <a href="#" class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group">
                 <i class="fas fa-wallet"></i>
                 <span>Billetera</span>
             </a>
@@ -347,14 +347,15 @@
             <a href="#" class="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-500 group">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Cerrar sesión</span>
-            </a>
+            </a> --}}
         </div>
     </div>
 
-    <<div class="ml-64 mt-4 px-4 pt-24">
+    <div class="ml-64 mt-4 px-4 pt-24">
         <div class="w-full max-w-4xl mx-auto">
             {{-- FORM TAMBAH PELAPOR --}}
-            <form action="{{ route('pengaduan.create.step.two.post') }}" method="POST" class="bg-white rounded-lg shadow-lg mb-6">
+            <form action="{{ route('pengaduan.create.step.two.post') }}" method="POST"
+                class="bg-white rounded-lg shadow-lg mb-6">
                 @csrf
                 <div class="border-b px-6 py-4">
                     <h2 class="text-xl font-semibold text-gray-700">Form Tambah Pelapor</h2>
@@ -365,9 +366,7 @@
                         <label class="flex items-center gap-1 text-gray-700 font-medium">
                             Nama <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" name="nama" placeholder="Masukkan nama"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-1 focus:ring-cyan-500 focus:outline-none"
-                            required>
+                        <input type="text" name="nama" placeholder="Masukkan nama" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-1 focus:ring-cyan-500 focus:outline-none">
                     </div>
 
                     <!-- NIP -->
@@ -375,9 +374,7 @@
                         <label class="flex items-center gap-1 text-gray-700 font-medium">
                             NIP <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" name="nip" placeholder="Masukkan NIP"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-1 focus:ring-cyan-500 focus:outline-none"
-                            required>
+                        <input type="text" name="nip" placeholder="Masukkan NIP" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-1 focus:ring-cyan-500 focus:outline-none">
                     </div>
 
                     <!-- Unit -->
@@ -385,9 +382,7 @@
                         <label class="flex items-center gap-1 text-gray-700 font-medium">
                             Unit <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" name="unit" placeholder="Masukkan unit"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-1 focus:ring-cyan-500 focus:outline-none"
-                            required>
+                        <input type="text" name="unit" placeholder="Masukkan unit" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-1 focus:ring-cyan-500 focus:outline-none">
                     </div>
 
                     <!-- Jabatan -->
@@ -395,9 +390,7 @@
                         <label class="flex items-center gap-1 text-gray-700 font-medium">
                             Jabatan <span class="text-red-500">*</span>
                         </label>
-                        <input type="text" name="jabatan" placeholder="Masukkan jabatan"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-1 focus:ring-cyan-500 focus:outline-none"
-                            required>
+                        <input type="text" name="jabatan" placeholder="Masukkan jabatan" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-1 focus:ring-cyan-500 focus:outline-none">
                     </div>
 
                     <button type="submit"
@@ -408,30 +401,37 @@
             </form>
 
             {{-- LIST PELAPOR DARI SESSION --}}
-            @if (session('pelapor'))
-                <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
-                    <h3 class="font-semibold mb-3">Daftar Pelapor</h3>
-                    <table class="w-full border text-sm">
-                        <thead class="bg-gray-100">
+            @if (session('pelapor') && count(session('pelapor')))
+                <table class="w-full border mt-4">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-2 border">Nama</th>
+                            <th class="px-4 py-2 border">NIP</th>
+                            <th class="px-4 py-2 border">Unit</th>
+                            <th class="px-4 py-2 border">Jabatan</th>
+                            <th class="px-4 py-2 border">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (session('pelapor', []) as $index => $p)
                             <tr>
-                                <th class="px-2 py-1 border">Nama</th>
-                                <th class="px-2 py-1 border">NIP</th>
-                                <th class="px-2 py-1 border">Unit</th>
-                                <th class="px-2 py-1 border">Jabatan</th>
+                                <td class="border px-4 py-2">{{ $p['nama'] }}</td>
+                                <td class="border px-4 py-2">{{ $p['nip'] }}</td>
+                                <td class="border px-4 py-2">{{ $p['unit'] }}</td>
+                                <td class="border px-4 py-2">{{ $p['jabatan'] }}</td>
+                                <td class="border px-4 py-2 text-center">
+                                    <form action="{{ route('pengaduan.pelapor.remove', $index) }}" method="POST"
+                                        onsubmit="return confirm('Hapus pelapor ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="text-red-600 hover:text-red-800 font-semibold">Hapus</button>
+                                    </form>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (session('pelapor') as $p)
-                                <tr>
-                                    <td class="border px-2 py-1">{{ $p['nama'] }}</td>
-                                    <td class="border px-2 py-1">{{ $p['nip'] }}</td>
-                                    <td class="border px-2 py-1">{{ $p['unit'] }}</td>
-                                    <td class="border px-2 py-1">{{ $p['jabatan'] }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                        @endforeach
+                    </tbody>
+                </table>
             @endif
 
             {{-- FORM LANJUT KE STEP 3 --}}
@@ -443,56 +443,56 @@
                         class="border border-cyan-600 text-cyan-600 hover:bg-cyan-50 px-8 py-2 rounded-md">
                         Batal
                     </button>
-                    <button type="submit"
+                    <button type="submit" name="lanjut" value="1"
                         class="bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-2 rounded-md shadow">
                         Lanjut
                     </button>
                 </div>
             </form>
         </div>
-        </div>
+    </div>
 
 
 
 
 
-        <!-- Script  -->
-        <script>
-            // Agregar lógica para mostrar/ocultar la navegación lateral al hacer clic en el ícono de menú
-            const menuBtn = document.getElementById('menuBtn');
-            const sideNav = document.getElementById('sideNav');
+    <!-- Script  -->
+    <script>
+        // Agregar lógica para mostrar/ocultar la navegación lateral al hacer clic en el ícono de menú
+        const menuBtn = document.getElementById('menuBtn');
+        const sideNav = document.getElementById('sideNav');
 
-            menuBtn.addEventListener('click', () => {
-                sideNav.classList.toggle('hidden');
+        menuBtn.addEventListener('click', () => {
+            sideNav.classList.toggle('hidden');
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#province').on('change', function() {
+                let provinceId = $(this).val();
+                if (provinceId) {
+                    $.ajax({
+                        url: '/regencies/' + provinceId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#regency').empty();
+                            $('#regency').append('<option value="">- Pilih Kota -</option>');
+                            $.each(data, function(key, value) {
+                                $('#regency').append('<option value="' + value.id +
+                                    '">' + value.name + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('#regency').empty();
+                    $('#regency').append('<option value="">- Pilih Kota -</option>');
+                }
             });
-        </script>
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#province').on('change', function() {
-                    let provinceId = $(this).val();
-                    if (provinceId) {
-                        $.ajax({
-                            url: '/regencies/' + provinceId,
-                            type: 'GET',
-                            dataType: 'json',
-                            success: function(data) {
-                                $('#regency').empty();
-                                $('#regency').append('<option value="">- Pilih Kota -</option>');
-                                $.each(data, function(key, value) {
-                                    $('#regency').append('<option value="' + value.id +
-                                        '">' + value.name + '</option>');
-                                });
-                            }
-                        });
-                    } else {
-                        $('#regency').empty();
-                        $('#regency').append('<option value="">- Pilih Kota -</option>');
-                    }
-                });
-            });
-        </script>
+        });
+    </script>
 </body>
 
 </html>

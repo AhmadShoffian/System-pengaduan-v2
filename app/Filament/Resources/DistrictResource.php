@@ -22,6 +22,16 @@ class DistrictResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getNavigationLabel(): string
+    {
+        return 'Kota';
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()?->can('view_any_district');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
