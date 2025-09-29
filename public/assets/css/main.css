@@ -12,10 +12,12 @@
 --------------------------------------------------------------*/
 /* Fonts */
 :root {
-  --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: "Poppins", "Poppins Fallback", sans-serif;
+  --heading-font: "Poppins", "Poppins Fallback", sans-serif;
+  --nav-font: "Poppins", "Poppins Fallback", sans-serif;
+  --font-style: normal;
 }
+
 
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
@@ -136,6 +138,695 @@ h6 {
 
   100% {
     transform: rotate(360deg);
+  }
+}
+
+
+/*======================================
+    Hero Area CSS
+========================================*/
+.hero-area {
+  position: relative;
+  padding: 150px 0 120px 0;
+  background: #fff;
+}
+
+.hero-area.style1 .hero-image img {
+  border-radius: 10px;
+}
+
+.hero-area.style2 {
+  background-color: #061E5C;
+}
+
+.hero-area.style2 .hero-content h1 {
+  color: #fff;
+}
+
+.hero-area.style2 .hero-content p {
+  color: #fff;
+}
+
+.hero-area.style2 .hero-content .trial-form .button .btn:hover {
+  color: #5034FC;
+  background-color: #fff;
+}
+
+.hero-area.style2 .hero-content .video-button i {
+  background-color: #fff;
+  color: #5034FC;
+}
+
+.hero-area.style2 .hero-content .video-button:hover i {
+  background-color: #5034FC;
+  color: #fff;
+}
+
+.hero-area.style2 .hero-content .video-button .text {
+  color: #fff !important;
+}
+
+.hero-area.style3 {
+  background-color: #5034FC;
+  padding-bottom: 0;
+  padding-top: 230px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style3 {
+    padding-top: 150px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style3 {
+    padding-top: 120px;
+    padding-bottom: 50px;
+  }
+}
+
+.hero-area.style3 .hero-content {
+  text-align: center;
+  padding: 0;
+}
+
+.hero-area.style3 .hero-content .innter-content {
+  border-radius: 10px;
+  text-align: left;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
+  .hero-area.style3 .hero-content .innter-content {
+    text-align: center;
+  }
+}
+
+.hero-area.style3 .hero-content .innter-content h1 {
+  color: #fff;
+}
+
+.hero-area.style3 .hero-content .innter-content p {
+  color: #fff;
+  margin: 0;
+  margin-top: 30px;
+}
+
+@media (max-width: 767px) {
+  .hero-area.style3 .hero-content .innter-content p {
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style3 .hero-content .innter-content .download-link {
+    margin-top: 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style3 .hero-content .innter-content .download-link {
+    margin-top: 40px;
+  }
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li:last-child {
+  margin: 0;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a {
+  width: 300px;
+  color: #061E5C;
+  font-size: 25px;
+  position: relative;
+  padding: 20px;
+  border-radius: 10px;
+  padding-left: 80px;
+  background-color: #fff;
+  text-align: left;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style3 .hero-content .innter-content .download-link li a {
+    width: 270px;
+  }
+  .hero-area.style3 .hero-content .innter-content .download-link li a .main-text {
+    font-size: 14px !important;
+  }
+  .hero-area.style3 .hero-content .innter-content .download-link li a .sub-text {
+    font-size: 13px !important;
+  }
+  .hero-area.style3 .hero-content .innter-content .download-link li a i {
+    font-size: 25px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style3 .hero-content .innter-content .download-link li a {
+    width: 80%;
+    padding: 15px 20px;
+    padding-left: 70px;
+  }
+  .hero-area.style3 .hero-content .innter-content .download-link li a .main-text {
+    font-size: 14px !important;
+  }
+  .hero-area.style3 .hero-content .innter-content .download-link li a .sub-text {
+    font-size: 13px !important;
+  }
+  .hero-area.style3 .hero-content .innter-content .download-link li a i {
+    font-size: 22px !important;
+  }
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a:hover {
+  color: #fff;
+  background-color: #061E5C;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a.alt {
+  background-color: transparent;
+  border: 1px solid #fff;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a.alt i {
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a.alt .main-text {
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a.alt .sub-text {
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a.alt:hover {
+  color: #061E5C !important;
+  border-color: transparent;
+  background-color: #fff;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a.alt:hover i {
+  color: #061E5C;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a.alt:hover .main-text {
+  color: #061E5C;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a.alt:hover .sub-text {
+  color: #061E5C;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a i {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  font-size: 28px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a .main-text {
+  font-size: 15px;
+  font-weight: 700;
+  display: block;
+}
+
+.hero-area.style3 .hero-content .innter-content .download-link li a .sub-text {
+  font-size: 14px;
+  display: block;
+  margin-top: 3px;
+}
+
+.hero-area.style3 .hero-image {
+  margin-top: 100px;
+}
+
+.hero-area.style3 .hero-image img {
+  border-radius: 10px 10px 0 0;
+}
+
+.hero-area.style4 {
+  background-color: #5034FC;
+  padding-bottom: 0;
+  padding-top: 100px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style4 {
+    padding-top: 150px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style4 {
+    padding-top: 110px;
+    padding-bottom: 50px;
+  }
+}
+
+.hero-area.style4 .hero-content {
+  text-align: center;
+  padding: 0;
+  padding-right: 180px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style4 .hero-content {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style4 .hero-content {
+    padding-right: 0;
+  }
+}
+
+.hero-area.style4 .hero-content .innter-content {
+  border-radius: 10px;
+  text-align: left;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style4 .hero-content .innter-content {
+    text-align: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style4 .hero-content .innter-content {
+    text-align: center;
+  }
+}
+
+.hero-area.style4 .hero-content .innter-content h1 {
+  color: #fff;
+  text-transform: inherit;
+  font-size: 40px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style4 .hero-content .innter-content h1 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style4 .hero-content .innter-content h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+.hero-area.style4 .hero-content .innter-content p {
+  color: #fff;
+  margin: 0;
+  margin-top: 30px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style4 .hero-content .innter-content p {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style4 .hero-content .innter-content p {
+    margin-top: 15px;
+  }
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link {
+  margin-top: 50px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style4 .hero-content .innter-content .download-link {
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style4 .hero-content .innter-content .download-link {
+    margin-top: 30px;
+  }
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li:last-child {
+  margin: 0;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a {
+  width: 270px;
+  color: #061E5C;
+  position: relative;
+  padding: 15px 20px;
+  border-radius: 10px;
+  padding-left: 80px;
+  background-color: #fff;
+  text-align: left;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area.style4 .hero-content .innter-content .download-link li a {
+    width: 270px;
+  }
+  .hero-area.style4 .hero-content .innter-content .download-link li a .main-text {
+    font-size: 14px !important;
+  }
+  .hero-area.style4 .hero-content .innter-content .download-link li a .sub-text {
+    font-size: 13px !important;
+  }
+  .hero-area.style4 .hero-content .innter-content .download-link li a i {
+    font-size: 25px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area.style4 .hero-content .innter-content .download-link li a {
+    width: 80%;
+    padding: 15px 20px;
+    padding-left: 70px;
+  }
+  .hero-area.style4 .hero-content .innter-content .download-link li a .main-text {
+    font-size: 14px !important;
+  }
+  .hero-area.style4 .hero-content .innter-content .download-link li a .sub-text {
+    font-size: 13px !important;
+  }
+  .hero-area.style4 .hero-content .innter-content .download-link li a i {
+    font-size: 22px !important;
+  }
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a:hover {
+  color: #fff;
+  background-color: #061E5C;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a.alt {
+  background-color: transparent;
+  border: 1px solid #fff;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a.alt i {
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a.alt .main-text {
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a.alt .sub-text {
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a.alt:hover {
+  color: #061E5C !important;
+  border-color: transparent;
+  background-color: #fff;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a.alt:hover i {
+  color: #061E5C;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a.alt:hover .main-text {
+  color: #061E5C;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a.alt:hover .sub-text {
+  color: #061E5C;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a i {
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  font-size: 30px;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a .main-text {
+  font-size: 15px;
+  font-weight: 700;
+  display: block;
+}
+
+.hero-area.style4 .hero-content .innter-content .download-link li a .sub-text {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.hero-area.style4 .hero-image {
+  margin-top: 100px;
+}
+
+.hero-area.style4 .hero-image img {
+  border-radius: 0;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area {
+    padding: 150px 0 80px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area {
+    padding: 120px 0 50px 0;
+  }
+}
+
+.hero-area .hero-image img {
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area .hero-image {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-image {
+    display: none;
+  }
+}
+
+.hero-area .hero-content {
+  border-radius: 0;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  padding-right: 90px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area .hero-content {
+    padding-right: 0;
+    padding: 0px 120px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-content {
+    padding-right: 0;
+  }
+}
+
+.hero-area .hero-content h1 {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 50px;
+  color: #061E5C;
+  text-transform: capitalize;
+}
+
+.hero-area .hero-content h1 span {
+  display: block;
+}
+
+.hero-area .hero-content p {
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.hero-area .hero-content .trial-form {
+  display: inline-block;
+  margin-top: 45px;
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-content .trial-form {
+    margin-top: 30px;
+  }
+}
+
+.hero-area .hero-content .trial-form input {
+  display: inline-block;
+  height: 55px;
+  width: 280px;
+  border: 1px solid #eee;
+  padding: 0px 20px;
+  border-radius: 5px;
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-content .trial-form input {
+    margin: 0;
+  }
+}
+
+.hero-area .hero-content .trial-form .button {
+  display: inline-block;
+  position: relative;
+  top: -1px;
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-content .trial-form .button {
+    top: 0;
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .hero-area .hero-content .trial-form .button .btn {
+    width: 100%;
+  }
+}
+
+.hero-area .hero-content .trial-form .button .btn {
+  height: 55px;
+  line-height: 55px;
+  padding: 0px 25px;
+}
+
+.hero-area .hero-content .video-button {
+  margin-top: 35px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area .hero-content .video-button {
+    display: block;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-content .video-button {
+    display: block;
+    margin-top: 30px;
+  }
+}
+
+.hero-area .hero-content .video-button .text {
+  color: #061E5C !important;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area .hero-content .video-button i {
+  display: inline-block;
+  margin-right: 10px;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  text-align: center;
+  display: inline-block;
+  background-color: #5034FC;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 50%;
+  padding-left: 3px;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hero-area .hero-content .video-button:hover i {
+  background-color: #061E5C;
+  color: #fff;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .hero-area .hero-content h1 {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area .hero-content {
+    text-align: center;
+  }
+  .hero-area .hero-content h1 {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 38px;
+  }
+  .hero-area .hero-content p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-area .hero-content {
+    padding: 0 10px;
+    text-align: center;
+  }
+  .hero-area .hero-content h1 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .hero-area .hero-content p {
+    margin-top: 15px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .hero-area .hero-content .button .btn {
+    width: 60%;
+    margin: 0;
+    margin-bottom: 7px;
+  }
+  .hero-area .hero-content .button .btn:last-child {
+    margin: 0;
   }
 }
 

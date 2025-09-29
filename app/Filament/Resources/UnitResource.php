@@ -20,6 +20,7 @@ class UnitResource extends Resource
     protected static ?string $model = Unit::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Master Menu';
 
     public static function getNavigationLabel(): string
     {

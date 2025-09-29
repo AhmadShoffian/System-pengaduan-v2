@@ -156,7 +156,7 @@
         <!-- Items -->
         <div class="p-4 space-y-4">
             <!-- Inicio -->
-            <a href="#" aria-label="dashboard"
+            <a href="{{ route('pengaduan.index') }}" aria-label="dashboard"
                 class="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400">
                 <i class="fas fa-home text-white"></i>
                 <span class="-mr-1 font-medium">Pengaduan</span>
@@ -209,27 +209,29 @@
                                         </a>
 
                                         {{-- Tombol Hapus --}}
-                                        @if ($lampiran['is_temp'])
-                                            {{-- hapus dari session --}}
-                                            <form
-                                                action="{{ route('pengaduan.edit.step.three.remove.lampiran', ['id' => $pengaduan->id, 'index' => $lampiran['id']]) }}"
-                                                method="POST" onsubmit="return confirm('Hapus lampiran ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-800">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        @else
-                                            {{-- hapus dari database --}}
-                                            <form action="{{ route('pengaduan.file.delete', $lampiran['id']) }}"
-                                                method="POST" onsubmit="return confirm('Hapus lampiran ini?')">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-800">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
+                                        @if ($pengaduan->status !== 'Proses')
+                                            @if ($lampiran['is_temp'])
+                                                {{-- Hapus dari session --}}
+                                                <form
+                                                    action="{{ route('pengaduan.edit.step.three.remove.lampiran', ['id' => $pengaduan->id, 'index' => $lampiran['id']]) }}"
+                                                    method="POST" onsubmit="return confirm('Hapus lampiran ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-800">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @else
+                                                {{-- Hapus dari database --}}
+                                                <form action="{{ route('pengaduan.file.delete', $lampiran['id']) }}"
+                                                    method="POST" onsubmit="return confirm('Hapus lampiran ini?')">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="text-red-600 hover:text-red-800">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         @endif
                                     </li>
                                 @endforeach
@@ -237,43 +239,19 @@
                         </div>
                     @endif
 
-
-                    {{-- Form Tambah Lampiran (session) --}}
-                    <form action="{{ route('pengaduan.edit.step.three.add.lampiran', $pengaduan->id) }}" method="POST"
-                        enctype="multipart/form-data" class="space-y-4">
-                        @csrf
-                        <input type="file" name="lampiran[]" multiple
-                            class="w-full text-sm text-gray-700 border border-gray-300 rounded-md cursor-pointer focus:outline-none focus:ring-1 focus:ring-cyan-500">
-                        <button type="submit"
-                            class="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded-md shadow flex items-center gap-2">
-                            <i class="fa fa-plus"></i> Tambah Lampiran
-                        </button>
-                    </form>
-
-                    {{-- Tampilkan Lampiran dari Session --}}
-                    {{-- @if (!empty(session('pengaduan_lampiran')) && count(session('pengaduan_lampiran')) > 0)
-                        <div class="mt-4">
-                            <h4 class="font-semibold text-gray-700 mb-2">Lampiran Sementara:</h4>
-                            <ul class="space-y-1">
-                                @foreach (session('pengaduan_lampiran') as $index => $file)
-                                    <li class="flex justify-between items-center border p-2 rounded">
-                                        <span>{{ $file['file_name'] }}</span>
-                                        <form
-                                            action="{{ route('pengaduan.edit.step.three.remove.lampiran', ['id' => $pengaduan->id, 'index' => $index]) }}"
-                                            method="POST" onsubmit="return confirm('Hapus lampiran ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif --}}
-
-
+                    {{-- Form Tambah Lampiran --}}
+                    @if ($pengaduan->status === 'Proses')
+                        <form action="{{ route('pengaduan.edit.step.three.add.lampiran', $pengaduan->id) }}"
+                            method="POST" enctype="multipart/form-data" class="space-y-4">
+                            @csrf
+                            <input type="file" name="lampiran[]" multiple
+                                class="w-full text-sm text-gray-700 border border-gray-300 rounded-md cursor-pointer focus:outline-none focus:ring-1 focus:ring-cyan-500">
+                            <button type="submit"
+                                class="bg-cyan-500 hover:bg-cyan-600 text-white px-5 py-2 rounded-md shadow flex items-center gap-2">
+                                <i class="fa fa-plus"></i> Tambah Lampiran
+                            </button>
+                        </form>
+                    @endif
 
                     <hr class="my-4">
 
@@ -287,10 +265,7 @@
                         </button>
                     </form>
                 </div>
-
-
             </div>
-
         </div>
     </div>
 

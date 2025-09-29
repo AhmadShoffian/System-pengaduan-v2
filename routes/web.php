@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -25,9 +26,14 @@ Route::get('/', [FrontendController::class, 'index']);
 Route::get('/signin', [FrontendController::class, 'signin'])->name('signin');
 Route::post('/signin/check', [FrontendController::class, 'check'])->name('signin.check');
 Route::get('/signup', [FrontendController::class, 'signup'])->name('signup');
+Route::post('/signup', [FrontendController::class, 'register'])->name('register.proses');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.index');
 
@@ -46,7 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/pengaduan/step-three/remove-lampiran/{index}', [PengaduanController::class, 'removeLampiranStepThree'])->name('pengaduan.step.three.remove.lampiran');
     Route::delete('/pengaduan/file/{id}', [PengaduanController::class, 'deleteFile'])->name('pengaduan.file.delete');
 
-
+    Route::get('/pengaduan/exportpdf', [PengaduanController::class, 'exportpdf'])->name('pengaduan.export.pdf');
 
     Route::get('/pengaduan/{id}/edit/step-1', [PengaduanController::class, 'editStepOne'])->name('pengaduan.edit.step.one');
 
@@ -55,7 +61,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pengaduan/{id}/edit/step-2', [PengaduanController::class, 'editStepTwo'])->name('pengaduan.edit.step.two');
     Route::post('/pengaduan/{id}/edit/step-2', [PengaduanController::class, 'postEditStepTwo'])->name('pengaduan.edit.step.two.post');
     Route::delete('/pengaduan/{id}/pelapor/remove/{index}', [PengaduanController::class, 'removePelaporSession'])
-    ->name('pengaduan.pelapor.remove.session');
+        ->name('pengaduan.pelapor.remove.session');
 
 
     Route::get('/pengaduan/{id}/edit/step-3', [PengaduanController::class, 'editStepThree'])->name('pengaduan.edit.step.three');
@@ -70,6 +76,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
     Route::delete('/pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
 
+    Route::post('/logout', function () {
+        Auth::logout();
+        request()->session()->invalidate(); 
+        request()->session()->regenerateToken(); 
+
+        return redirect('/login'); 
+    })->name('logout');
 });
 
 require __DIR__ . '/auth.php';

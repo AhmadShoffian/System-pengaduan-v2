@@ -21,6 +21,7 @@ class ProvincesResource extends Resource
     protected static ?string $model = Province::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Master Menu';
 
     public static function getNavigationLabel(): string
     {

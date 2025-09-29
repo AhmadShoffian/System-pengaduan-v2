@@ -11,7 +11,7 @@
     <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -28,6 +28,36 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <style>
+        /* Warna khusus menu Pengaduan Saya */
+        .navmenu .highlight-menu {
+            display: flex;
+            /* aktifkan flex */
+            align-items: center !important;
+            /* vertikal tengah */
+            justify-content: center !important;
+            /* horizontal tengah */
+
+            color: #fff !important;
+            /* warna teks */
+            background-color: #e63946;
+            /* warna background */
+            padding: 8px 15px;
+            border-radius: 6px;
+            /* font-weight: bold; */
+            height: 40px;
+            /* tinggi konsisten */
+            min-width: 160px;
+            /* biar kotaknya agak lebar */
+            text-align: center;
+            /* fallback */
+        }
+
+        .navmenu .highlight-menu:hover {
+            background-color: #E43636;
+            color: #fff;
+        }
+    </style>
 
     <!-- =======================================================
   * Template Name: Gp
@@ -103,9 +133,10 @@
                     <li><a href="#hero" class="active">Home<br></a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Cara Melapor</a></li>
+                    <li><a href="#cara-melapor">Cara Melapor</a></li>
                     <li><a href="#team">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="{{ route('pengaduan.index') }}" class="highlight-menu">Pengaduan Saya</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -118,7 +149,7 @@
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="">Ubah Profile</a></li>
                     <li>
-                        <form method="POST" action="">
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="dropdown-item">Logout</button>
                         </form>
@@ -153,7 +184,6 @@
 
 
     <main class="main">
-
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
 
@@ -164,22 +194,142 @@
                 <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
                     <div>
                         <h2>Selamat datang di<br> Whistleblowing System</h2>
-                        <p style="font-size: 20px; line-height: 1.5;">Whistleblowing System adalah apilkasi yang
-                            disediakan oleh Institut Seni Indonesia bagi Anda
+                        <p class="mx-auto max-w-3xl text-[19px] leading-relaxed">
+                            Whistleblowing System adalah apilkasi yang disediakan oleh Institut Seni Indonesia bagi Anda
                             yang memiliki informasi dan ingin melaportkan suatu perbuatan berindikasi pelanggaran yang
-                            terjadi di lingkungan Institut Seni Indonesia Yogyakarta. <br><br>
-                            Anda tidak perlu khawatir terungkapnya identitas diri anda karena Institut Seni Indonesia
-                            Yogyakarta MERAHASIAKAN IDENTITAS DIRI ANDA sebagai whistleblower. ISI Yogyakarta menghargai
-                            informasi yang Anda laporkan. Fokus kami kepada materi informasi yang Anda laporkan.</p>
+                            terjadi di lingkungan Institut Seni Indonesia Yogyakarta.
+                        </p>
+
                     </div>
                 </div> <br>
 
-                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                <style>
+                   
+                    .lacak-pengaduan-container {
+                        max-width: 700px;
+                       
+                        margin: 60px auto;
+                      
+                        padding: 0 15px;
+                        text-align: center;
+                        /* Membuat judul dan subjudul terpusat */
+                    }
 
-                    <a href="{{ route('pengaduan.create.step.one') }}" class="btn btn-primary">Buat Pengaduan</a>
+                    .lacak-pengaduan-container .lacak-title {
+                        font-size: 28px;
+                        font-weight: 700;
+                        color: #212529;
+                        margin-bottom: 10px;
+                    }
+
+                    .lacak-pengaduan-container .lacak-subtitle {
+                        font-size: 16px;
+                        color: #6c757d;
+                        margin-bottom: 25px;
+                    }
+
+                    /* Kontainer untuk input dan tombol */
+                    .input-group-modern {
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+                        /* Shadow dipindah ke sini */
+                        border-radius: 12px;
+                    }
+
+                    .input-group-modern .form-control {
+                        height: 55px;
+                        border-radius: 12px;
+                        border: 1px solid #ced4da;
+                        padding-left: 20px;
+                        padding-right: 60px;
+                        /* Ruang untuk ikon tombol */
+                        font-size: 16px;
+                        transition: all 0.3s ease-in-out;
+                    }
+
+                    .input-group-modern .form-control:focus {
+                        border-color: #0d6efd;
+                        box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);
+                        outline: none;
+                    }
+
+                    /* Tombol pencarian yang terintegrasi */
+                    .input-group-modern .btn-lacak {
+                        position: absolute;
+                        right: 8px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        background: none;
+                        border: none;
+                        width: 40px;
+                        height: 40px;
+                        color: #6c757d;
+                        font-size: 20px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: color 0.3s;
+                    }
+
+                    .input-group-modern .btn-lacak:hover {
+                        color: #0d6efd;
+                    }
+
+                    /* Animasi getar untuk validasi error */
+                    @keyframes shake-horizontal {
+
+                        0%,
+                        100% {
+                            transform: translateX(0);
+                        }
+
+                        25% {
+                            transform: translateX(-6px);
+                        }
+
+                        75% {
+                            transform: translateX(6px);
+                        }
+                    }
+
+                    .input-group-modern .form-control.is-invalid {
+                        animation: shake-horizontal 0.3s;
+                        border-color: #dc3545;
+                        /* Merah untuk error */
+                    }
+                </style>
+
+                <div class="lacak-pengaduan-container">
+                    <form id="lacak-form" action="#" method="POST" class="mt-4">
+                        <div class="input-group-modern">
+                            <input type="text" id="kode-pengaduan" name="kode_pengaduan" class="form-control"
+                                placeholder="Masukkan Nomer Pengaduan Anda" required>
+                            <button type="submit" class="btn-lacak" aria-label="Lacak">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-center mt-6" data-aos="fade-up" data-aos-delay="200">
+                    <a href="{{ route('pengaduan.create.step.one') }}"
+                        class="inline-flex items-center gap-2 px-8 py-4 text-lg font-normal rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 text-white shadow-lg hover:from-indigo-700 hover:to-blue-700 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400 transition">
+                        <!-- Icon -->
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 20h9m-9 0H3m9-8h9m-9 0H3m9-8h9m-9 0H3">
+                            </path>
+                        </svg>
+                        Buat Pengaduan
+                    </a>
+                </div>
+
+
+                {{-- <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="icon-box">
                             <i class="bi bi-binoculars"></i>
@@ -210,50 +360,66 @@
                             <h3><a href="">Nemos Enimade</a></h3>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
 
-        </section><!-- /Hero Section -->
+        </section>
 
         <!-- About Section -->
-        <section id="about" class="about section">
+        <section id="about" class="about section py-12">
+            <div class="container section-title" data-aos="fade-up">
+                <h2>About</h2>
+                <p>Check our About</p>
+            </div>
+            <div class="container mx-auto px-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-                <div class="row gy-4">
-                    <div class="col-lg-6 order-1 order-lg-2">
-                        <img src="../assets/img/about.jpg" class="img-fluid" alt="">
+                    <!-- Gambar -->
+                    <div class="order-1 lg:order-2">
+                        <img src="../assets/img/about.jpg" alt="Tentang Pengaduan"
+                            class="w-full h-auto max-h-[420px] object-cover rounded-xl shadow-md">
                     </div>
-                    <div class="col-lg-6 order-2 order-lg-1 content">
-                        <h3>Unsur Pegaduan</h3>
-                        <p class="fst-italic">
+
+                    <!-- Teks -->
+                    <div class="order-2 lg:order-1 space-y-4">
+                        <h3 class="text-2xl font-semibold text-gray-800">Unsur Pengaduan</h3>
+                        <p class="text-gray-700 text-lg">
                             Pengaduan anda akan mudah ditindaklanjuti apabila memenuhi unsur sebagai berikut :
                         </p>
-                        <ul>
-                            <li><i class="bi bi-check2-all"></i> <span>What : Perbuatan berindikasi pelanggaran yang
-                                    diketahui.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>Where : Dimana perbuatan tersebut
-                                    dilakukan.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>When : Kapan perbuatan tersebut
-                                    dilakukan.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>Who : Siapa saja yang terlibat dalam perbuatan
-                                    tersebut.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>How : Bagaimana perbuatan tersebut dilakukan
-                                    (modus, cara, dsb).</span></li>
+                        <ul class="space-y-2 text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <i class="bi bi-check2-all text-green-600 mt-1"></i>
+                                <span><strong>What:</strong> Perbuatan berindikasi pelanggaran yang diketahui.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="bi bi-check2-all text-green-600 mt-1"></i>
+                                <span><strong>Where:</strong> Dimana perbuatan tersebut dilakukan.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="bi bi-check2-all text-green-600 mt-1"></i>
+                                <span><strong>When:</strong> Kapan perbuatan tersebut dilakukan.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="bi bi-check2-all text-green-600 mt-1"></i>
+                                <span><strong>Who:</strong> Siapa saja yang terlibat dalam perbuatan tersebut.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="bi bi-check2-all text-green-600 mt-1"></i>
+                                <span><strong>How:</strong> Bagaimana perbuatan tersebut dilakukan (modus, cara,
+                                    dsb).</span>
+                            </li>
                         </ul>
-                        <p>
+                        <p class="text-gray-600">
                             Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident
+                            reprehenderit
+                            in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                         </p>
                     </div>
                 </div>
-
             </div>
+        </section>
 
-        </section><!-- /About Section -->
 
         <!-- Clients Section -->
         {{-- <section id="clients" class="clients section">
@@ -321,52 +487,57 @@
 
         <!-- Features Section -->
         <section id="features" class="features section">
-
             <div class="container">
+                <div class="row align-items-center gy-4">
 
-                <div class="row gy-4">
-                    <div class="features-image col-lg-6 pe-4" data-aos="fade-up" data-aos-delay="100"><img
-                            src="../assets/img/features-bg.jpg" alt=""></div>
-
-                    <div class="col-lg-6 order-2 order-lg-1 content ps-4">
-                        <h3>Kerahasiaan Pelapor</h3>
-                        <p class="fst-italic">
+                    <!-- Konten (kiri di desktop) -->
+                    <div class="col-lg-6 order-2 order-lg-1 content ps-lg-4">
+                        <h3 class="mb-3">Kerahasiaan Pelapor</h3>
+                        <p class="fst-poppins">
                             Institut Seni Indeonesia Yogyakarta akan merahasiakan identitas pribadi Anda sebagai
                             whistleblower karena ISI Yogyakarta hanya fokus pada informasi Anda laporkan. <br>
                             Agar Kerahasiaan lebih terjaga, perhatikan hal-hal berikut ini :
                         </p>
-                        <ul>
-                            <li><i class="bi bi-check2-all"></i> <span>Jika ingin identitas Anda tetap rahasia, jangan
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check2-all text-success me-2"></i>
+                                <span>Jika ingin identitas Anda tetap rahasia, jangan
                                     memberitahukan/mengisi data-data pribadi, seperti nama Anda, atau hubungan Anda
-                                    dengan pelaku-pelaku.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>Jangan memberitahukan / mengisikan data-data /
+                                    dengan pelaku-pelaku.</span>
+                            </li>
+                            <li class="mb-2"><i class="bi bi-check2-all text-success me-2"></i>
+                                <span>Jangan memberitahukan / mengisikan data-data /
                                     informasi yang memungkinkan bagi orang lain untuk melakukan pelacakan siapa
-                                    Anda.</span></li>
-                            <li><i class="bi bi-check2-all"></i> <span>Hindari orang lain mengetahui nama samaran
-                                    (username), kata sandi (password) serta nomor registrasi Anda.</span></li>
+                                    Anda.</span>
+                            </li>
+                            <li class="mb-2"><i class="bi bi-check2-all text-success me-2"></i>
+                                <span>Hindari orang lain mengetahui nama samaran
+                                    (username), kata sandi (password) serta nomor registrasi Anda.</span>
+                            </li>
                         </ul>
-                        <p>
+                        <p class="mt-3">
                             Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident
+                            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                         </p>
                     </div>
+
+                    <!-- Gambar (kanan di desktop) -->
+                    <div class="features-image col-lg-6 order-1 order-lg-2 pe-lg-4" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <img src="../assets/img/features-bg.jpg" class="img-fluid rounded shadow" alt="">
+                    </div>
                 </div>
-
             </div>
+        </section>
 
-        </section><!-- /Features Section -->
+
 
         <!-- Services Section -->
         <section id="services" class="services section">
 
-            <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Services</h2>
-                <p>Check our Services</p>
-            </div><!-- End Section Title -->
-
+                <h2>Fitur Utama Sistem</h2>
+                <p>Kami Menjamin Keamanan dan Kerahasiaan Anda</p>
+            </div>
             <div class="container">
 
                 <div class="row gy-4">
@@ -374,90 +545,80 @@
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-activity"></i>
+                                <i class="bi bi-shield-lock"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Nesciunt Mete</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Pelaporan Anonim & Rahasia</h3>
                             </a>
-                            <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores
-                                iure perferendis tempore et consequatur.</p>
+                            <p>Identitas Anda sepenuhnya terlindungi. Anda dapat mengirimkan laporan tanpa rasa khawatir
+                                karena sistem kami menjamin kerahasiaan data pribadi Anda.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-broadcast"></i>
+                                <i class="bi bi-key-fill"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Eosle Commodi</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Keamanan Data Terenkripsi</h3>
                             </a>
-                            <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum
-                                hic non ut nesciunt dolorem.</p>
+                            <p>Semua informasi dan bukti yang Anda kirimkan dienkripsi secara end-to-end, memastikan
+                                hanya pihak berwenang yang dapat mengakses laporan Anda.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-easel"></i>
+                                <i class="bi bi-graph-up"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Ledo Markt</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Sistem Pelacakan Laporan</h3>
                             </a>
-                            <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id
-                                voluptas adipisci eos earum corrupti.</p>
+                            <p>Setelah melapor, Anda akan menerima nomor tiket unik untuk memantau status dan
+                                perkembangan penanganan laporan Anda secara transparan.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-bounding-box-circles"></i>
+                                <i class="bi bi-balance-fill"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Asperiores Commodit</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Investigasi Independen</h3>
                             </a>
-                            <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga
-                                sit provident adipisci neque.</p>
-                            <a href="service-details.html" class="stretched-link"></a>
+                            <p>Setiap laporan yang masuk akan ditangani dan ditindaklanjuti oleh tim investigasi yang
+                                independen, objektif, dan profesional.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-calendar4-week"></i>
+                                <i class="bi bi-shield-check"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Velit Doloremque</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Perlindungan Bagi Pelapor</h3>
                             </a>
-                            <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed
-                                animi at autem alias eius labore.</p>
-                            <a href="service-details.html" class="stretched-link"></a>
+                            <p>Kami berkomitmen memberikan perlindungan penuh terhadap segala bentuk intimidasi atau
+                                tindakan balasan (retaliasi) kepada pelapor.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-chat-square-text"></i>
+                                <i class="bi bi-chat-quote-fill"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Dolori Architecto</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Komunikasi Dua Arah</h3>
                             </a>
-                            <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                Corrupti recusandae ducimus enim.</p>
-                            <a href="service-details.html" class="stretched-link"></a>
+                            <p>Sistem menyediakan sarana komunikasi yang aman antara Anda dan tim investigasi untuk
+                                permintaan informasi tambahan tanpa mengungkap identitas.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                 </div>
 
             </div>
 
-        </section><!-- /Services Section -->
-
+        </section>
         <!-- Call To Action Section -->
         <section id="call-to-action" class="call-to-action section dark-background">
 
@@ -466,13 +627,13 @@
             <div class="container">
                 <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
                     <div class="col-xl-10">
-                        <div class="text-center">
+                        {{-- <div class="text-center">
                             <h3>Call To Action</h3>
                             <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
                                 nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                                 officia deserunt mollit anim id est laborum.</p>
                             <a class="cta-btn" href="#">Call To Action</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -480,164 +641,129 @@
         </section><!-- /Call To Action Section -->
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio section">
+        <section id="cara-melapor" class="portfolio section">
 
-            <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Portfolio</h2>
-                <p>Check our Portfolio</p>
-            </div><!-- End Section Title -->
+                <h2>Cara Melapor</h2>
+                <p>Panduan Lengkap untuk Mengajukan Pengaduan</p>
+            </div>
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-4 p-md-5">
 
-            <div class="container">
-
-                <div class="isotope-layout" data-default-filter="*" data-layout="masonry"
-                    data-sort="original-order">
-
-                    <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-app">App</li>
-                        <li data-filter=".filter-product">Card</li>
-                        <li data-filter=".filter-branding">Web</li>
-                    </ul><!-- End Portfolio Filters -->
-
-                    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>App 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1"
-                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                        <div class="row g-0 mb-3">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">1</div>
+                                <div class="border-primary mx-auto mt-2"
+                                    style="width: 2px; height: 4rem; background: linear-gradient(to bottom, #0d6efd, #e9ecef);">
+                                </div>
                             </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Product 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1"
-                                    data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-box-arrow-in-right fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Login ke Sistem</h5>
+                                </div>
+                                <p class="mb-0">Klik tombol "Login", lalu isikan Username dan Password Anda yang
+                                    telah terdaftar.</p>
                             </div>
-                        </div><!-- End Portfolio Item -->
+                        </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Branding 1</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1"
-                                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                        <div class="row g-0 mb-3">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">2</div>
+                                <div class="border-primary mx-auto mt-2"
+                                    style="width: 2px; height: 7rem; background: linear-gradient(to bottom, #0d6efd, #e9ecef);">
+                                </div>
                             </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>App 2</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2"
-                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-person-plus-fill fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Registrasi (Jika Belum Terdaftar)</h5>
+                                </div>
+                                <p>Jika belum memiliki akun, klik "Register". Isi data yang diperlukan dan pastikan
+                                    untuk:</p>
+                                <ul class="list-unstyled mt-2 ps-3">
+                                    <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>Buat
+                                        Nama Samaran (username) dan kata sandi yang unik.</li>
+                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Hindari penggunaan
+                                        nama yang dapat mengidentifikasi diri Anda.</li>
+                                </ul>
                             </div>
-                        </div><!-- End Portfolio Item -->
+                        </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Product 2</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2"
-                                    data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                        <div class="row g-0 mb-3">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">3</div>
+                                <div class="border-primary mx-auto mt-2"
+                                    style="width: 2px; height: 4rem; background: linear-gradient(to bottom, #0d6efd, #e9ecef);">
+                                </div>
                             </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Branding 2</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2"
-                                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-file-earmark-plus-fill fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Isi Formulir Pengaduan</h5>
+                                </div>
+                                <p>Klik "Buat Pengaduan Baru", isi semua kolom yang wajib diisi, dan pastikan informasi
+                                    memenuhi unsur <strong>4W+1H</strong> (What, Where, When, Who, How).</p>
                             </div>
-                        </div><!-- End Portfolio Item -->
+                        </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>App 3</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3"
-                                    data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                        <div class="row g-0 mb-3">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">4</div>
+                                <div class="border-primary mx-auto mt-2"
+                                    style="width: 2px; height: 4rem; background: linear-gradient(to bottom, #0d6efd, #e9ecef);">
+                                </div>
                             </div>
-                        </div><!-- End Portfolio Item -->
-
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Product 3</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3"
-                                    data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-paperclip fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Unggah Bukti Pendukung</h5>
+                                </div>
+                                <p>Lampirkan file bukti seperti foto, dokumen, atau rekaman untuk memperkuat laporan
+                                    Anda.</p>
                             </div>
-                        </div><!-- End Portfolio Item -->
+                        </div>
 
-                        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                            <img src="../assets/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid"
-                                alt="">
-                            <div class="portfolio-info">
-                                <h4>Branding 3</h4>
-                                <p>Lorem ipsum, dolor sit</p>
-                                <a href="../assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2"
-                                    data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i
-                                        class="bi bi-zoom-in"></i></a>
-                                <a href="portfolio-details.html" title="More Details" class="details-link"><i
-                                        class="bi bi-link-45deg"></i></a>
+                        <div class="row g-0">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">5</div>
                             </div>
-                        </div><!-- End Portfolio Item -->
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-send-check-fill fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Kirim & Simpan Nomor Registrasi</h5>
+                                </div>
+                                <p class="mb-0">Setelah selesai, klik "Kirim". **Catat dan simpan dengan baik Nomor
+                                    Registrasi** yang muncul untuk melacak status pengaduan Anda.</p>
+                            </div>
+                        </div>
 
-                    </div><!-- End Portfolio Container -->
+                        <hr class="my-4">
 
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i>
+                            <div>
+                                <h5 class="alert-heading">Penting untuk Diingat!</h5>
+                                <p class="mb-0">Selalu jaga kerahasiaan **Username, Password, dan Nomor Registrasi**
+                                    Anda. Gunakan nomor registrasi untuk memantau tindak lanjut laporan melalui sistem
+                                    ini.</p>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-
             </div>
 
-        </section><!-- /Portfolio Section -->
+        </section>```
 
         <!-- Stats Section -->
-        <section id="stats" class="stats section">
+        {{-- <section id="stats" class="stats section">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -709,10 +835,10 @@
 
             </div>
 
-        </section><!-- /Stats Section -->
+        </section><!-- /Stats Section --> --}}
 
         <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials section dark-background">
+        {{-- <section id="testimonials" class="testimonials section dark-background">
 
             <img src="../assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
 
@@ -847,10 +973,10 @@
 
             </div>
 
-        </section><!-- /Testimonials Section -->
+        </section><!-- /Testimonials Section --> --}}
 
         <!-- Team Section -->
-        <section id="team" class="team section">
+        {{-- <section id="team" class="team section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -860,89 +986,464 @@
 
             <div class="container">
 
-                <div class="row gy-4">
-
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="../assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Walter White</h4>
-                                <span>Chief Executive Officer</span>
-                            </div>
+                <!-- component -->
+                <div class="max-w-screen-xl mx-auto px-5 bg-white min-h-sceen">
+                    <div class="flex flex-col items-center">
+                        <h2 class="font-bold text-5xl mt-5 tracking-tight">
+                            FAQ
+                        </h2>
+                        <p class="text-neutral-500 text-xl mt-3">
+                            Frequenty asked questions
+                        </p>
+                    </div>
+                    <div class="grid divide-y divide-neutral-200 max-w-xl mx-auto mt-8">
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> What is a SAAS platform?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    SAAS platform is a cloud-based software service that allows users to access
+                                    and use a variety of tools and functionality.
+                                </p>
+                            </details>
                         </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="../assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
-                            </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> How does billing work?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    We offers a variety of billing options, including monthly and annual subscription
+                                    plans,
+                                    as well as pay-as-you-go pricing for certain services. Payment is typically made
+                                    through a credit
+                                    card or other secure online payment method.
+                                </p>
+                            </details>
                         </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="../assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>William Anderson</h4>
-                                <span>CTO</span>
-                            </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> Can I get a refund for my subscription?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    We offers a 30-day money-back guarantee for most of its subscription plans. If you
+                                    are not
+                                    satisfied with your subscription within the first 30 days, you can request a full
+                                    refund. Refunds
+                                    for subscriptions that have been active for longer than 30 days may be considered on
+                                    a case-by-case
+                                    basis.
+                                </p>
+                            </details>
                         </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up"
-                        data-aos-delay="400">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="../assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Amanda Jepson</h4>
-                                <span>Accountant</span>
-                            </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> How do I cancel my subscription?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    To cancel your We subscription, you can log in to your account and navigate to the
+                                    subscription management page. From there, you should be able to cancel your
+                                    subscription and stop
+                                    future billing.
+                                </p>
+                            </details>
                         </div>
-                    </div><!-- End Team Member -->
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> Can I try this platform for free?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    We offers a free trial of its platform for a limited time. During the trial period,
+                                    you will have access to a limited set of features and functionality, but you will
+                                    not be charged.
+                                </p>
+                            </details>
+                        </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> How do I access documentation?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Documentation is available on the company's website and can be accessed by
+                                    logging in to your account. The documentation provides detailed information on how
+                                    to use the ,
+                                    as well as code examples and other resources.
+                                </p>
+                            </details>
+                        </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> How do I contact support?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    If you need help with the platform or have any other questions, you can contact the
+                                    company's support team by submitting a support request through the website or by
+                                    emailing
+                                    support@We.com.
+                                </p>
+                            </details>
+                        </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> Do you offer any discounts or promotions?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    We may offer discounts or promotions from time to time. To stay up-to-date on the
+                                    latest
+                                    deals and special offers, you can sign up for the company's newsletter or follow it
+                                    on social media.
+                                </p>
+                            </details>
+                        </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span> How do we compare to other similar services?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    This platform is a highly reliable and feature-rich service that offers a wide range
+                                    of tools and functionality. It is competitively priced and offers a variety of
+                                    billing options to
+                                    suit different needs and budgets.
+                                </p>
+                            </details>
+                        </div>
+                    </div>
+                </div>
 
+                <script>
+                    // ...
+                    // extend: {
+                    //   keyframes: {
+                    //     fadeIn: {
+                    //       "0%": { opacity: 0 },
+                    //       "100%": { opacity: 100 },
+                    //     },
+                    //   },
+                    //   animation: {
+                    //     fadeIn: "fadeIn 0.2s ease-in-out forwards",
+                    //   },
+                    // },
+                    // ...
+                </script>
+
+            </div>
+
+        </section> --}}
+
+        <section id="faq" class="faq section">
+
+            <div class="container section-title" data-aos="fade-up">
+                <h2>Pertanyaan Umum (FAQ)</h2>
+                <p>Temukan jawaban atas pertanyaan umum mengenai Sistem Pelaporan Pelanggaran (Whistleblowing System)
+                    kami.</p>
+            </div>
+            <div class="container">
+
+                <div class="w-full max-w-3xl mx-auto bg-white">
+                    <div class="grid divide-y divide-neutral-200">
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Apa itu Sistem Pelaporan Pelanggaran (Whistleblowing System)?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Ini adalah saluran komunikasi yang aman dan rahasia untuk melaporkan dugaan
+                                    pelanggaran hukum, peraturan perusahaan, kode etik, atau norma kesusilaan yang
+                                    terjadi di lingkungan perusahaan. Sistem ini adalah bagian dari komitmen kami untuk
+                                    menjaga integritas dan tata kelola yang baik.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Jenis pelanggaran apa yang bisa dilaporkan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Anda dapat melaporkan berbagai tindakan, termasuk namun tidak terbatas pada:
+                                    korupsi, penipuan (fraud), pencurian aset, penyalahgunaan wewenang, konflik
+                                    kepentingan, suap, pelanggaran keamanan dan keselamatan kerja (K3), serta pelecehan
+                                    dan diskriminasi.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Siapa saja yang dapat membuat laporan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Seluruh pihak, baik internal (karyawan, direksi, dewan komisaris) maupun eksternal
+                                    (mitra bisnis, pemasok, konsultan, pelanggan) yang mengetahui atau mencurigai adanya
+                                    pelanggaran dapat menggunakan sistem ini.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Apakah identitas pelapor akan dirahasiakan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Ya. Perusahaan menjamin kerahasiaan penuh atas identitas pelapor. Semua laporan akan
+                                    ditangani oleh tim independen yang ditunjuk khusus untuk menjaga objektivitas dan
+                                    kerahasiaan informasi.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Bisakah saya melapor secara anonim (tanpa nama)?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Tentu. Sistem ini memungkinkan Anda untuk membuat laporan secara anonim. Namun, kami
+                                    mendorong Anda untuk memberikan identitas agar tim dapat menghubungi Anda jika
+                                    memerlukan klarifikasi atau informasi tambahan untuk memperlancar proses
+                                    investigasi.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Apakah saya akan dilindungi dari tindakan balasan (retaliasi)?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Perusahaan berkomitmen penuh untuk melindungi setiap pelapor yang beritikad baik
+                                    dari segala bentuk tindakan balasan, seperti intimidasi, pelecehan, penurunan
+                                    jabatan, atau pemecatan. Perlindungan ini dijamin dalam kebijakan perusahaan.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Bagaimana cara saya membuat laporan yang efektif?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Untuk membuat laporan yang efektif, mohon jelaskan unsur 5W+1H: **What** (apa
+                                    pelanggarannya), **Who** (siapa yang terlibat), **Where** (di mana terjadinya),
+                                    **When** (kapan terjadinya), **Why** (mengapa itu terjadi), dan **How** (bagaimana
+                                    modusnya). Sertakan juga bukti pendukung jika ada.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Bukti apa saja yang perlu saya lampirkan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Sertakan bukti relevan yang Anda miliki, seperti dokumen, email, foto, video,
+                                    rekaman, atau nama saksi lain yang mengetahui kejadian tersebut. Semakin kuat bukti
+                                    awal yang Anda berikan, semakin mudah bagi tim untuk menindaklanjuti laporan.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Apa yang terjadi setelah saya mengirimkan laporan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Setiap laporan yang masuk akan melalui proses penelaahan awal oleh tim yang
+                                    berwenang. Jika laporan memenuhi kriteria dan didukung bukti awal yang cukup,
+                                    laporan akan dilanjutkan ke tahap investigasi lebih lanjut sesuai prosedur internal
+                                    yang berlaku.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Bagaimana saya bisa memantau status laporan saya?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Setelah mengirim laporan melalui sistem online, Anda akan menerima sebuah nomor
+                                    registrasi atau kode unik. Anda dapat menggunakan kode tersebut untuk masuk kembali
+                                    ke sistem dan memantau status atau perkembangan penanganan laporan Anda secara aman
+                                    dan anonim.
+                                </p>
+                            </details>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
 
-        </section><!-- /Team Section -->
+        </section>
 
         <!-- Contact Section -->
         <section id="contact" class="contact section">
@@ -957,77 +1458,78 @@
 
                 <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
                     <iframe style="border:0; width: 100%; height: 270px;"
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15809.53995876359!2d110.3592185590924!3d-7.854899534942918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a57a057223e7f%3A0x5027a76e356c1f0!2sPanggungharjo%2C%20Kec.%20Sewon%2C%20Kabupaten%20Bantul%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1727323719119!5m2!1sid!2sid"
                         frameborder="0" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div><!-- End Google Maps -->
+                </div>
+            </div><!-- End Google Maps -->
 
-                <div class="row gy-4">
+            <div class="row gy-4">
 
-                    <div class="col-lg-4">
-                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-                            <i class="bi bi-geo-alt flex-shrink-0"></i>
-                            <div>
-                                <h3>Address</h3>
-                                <p>A108 Adam Street, New York, NY 535022</p>
-                            </div>
-                        </div><!-- End Info Item -->
+                <div class="col-lg-4">
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                        <i class="bi bi-geo-alt flex-shrink-0"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <p>A108 Adam Street, New York, NY 535022</p>
+                        </div>
+                    </div><!-- End Info Item -->
 
-                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                            <i class="bi bi-telephone flex-shrink-0"></i>
-                            <div>
-                                <h3>Call Us</h3>
-                                <p>+1 5589 55488 55</p>
-                            </div>
-                        </div><!-- End Info Item -->
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                        <i class="bi bi-telephone flex-shrink-0"></i>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p>+1 5589 55488 55</p>
+                        </div>
+                    </div><!-- End Info Item -->
 
-                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
-                            <i class="bi bi-envelope flex-shrink-0"></i>
-                            <div>
-                                <h3>Email Us</h3>
-                                <p>info@example.com</p>
-                            </div>
-                        </div><!-- End Info Item -->
-
-                    </div>
-
-                    <div class="col-lg-8">
-                        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-                            data-aos-delay="200">
-                            <div class="row gy-4">
-
-                                <div class="col-md-6">
-                                    <input type="text" name="name" class="form-control"
-                                        placeholder="Your Name" required="">
-                                </div>
-
-                                <div class="col-md-6 ">
-                                    <input type="email" class="form-control" name="email"
-                                        placeholder="Your Email" required="">
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="subject" placeholder="Subject"
-                                        required="">
-                                </div>
-
-                                <div class="col-md-12">
-                                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                                </div>
-
-                                <div class="col-md-12 text-center">
-                                    <div class="loading">Loading</div>
-                                    <div class="error-message"></div>
-                                    <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                    <button type="submit">Send Message</button>
-                                </div>
-
-                            </div>
-                        </form>
-                    </div><!-- End Contact Form -->
+                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
+                        <i class="bi bi-envelope flex-shrink-0"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>info@example.com</p>
+                        </div>
+                    </div><!-- End Info Item -->
 
                 </div>
+
+                <div class="col-lg-8">
+                    <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
+                        data-aos-delay="200">
+                        <div class="row gy-4">
+
+                            <div class="col-md-6">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name"
+                                    required="">
+                            </div>
+
+                            <div class="col-md-6 ">
+                                <input type="email" class="form-control" name="email" placeholder="Your Email"
+                                    required="">
+                            </div>
+
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                    required="">
+                            </div>
+
+                            <div class="col-md-12">
+                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                                <button type="submit">Send Message</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div><!-- End Contact Form -->
+
+            </div>
 
             </div>
 
@@ -1132,6 +1634,36 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lacakForm = document.getElementById('lacak-form');
+            const kodeInput = document.getElementById('kode-pengaduan');
+
+            if (lacakForm) {
+                lacakForm.addEventListener('submit', function(event) {
+                    // Hapus spasi dari awal dan akhir
+                    const kodeValue = kodeInput.value.trim();
+
+                    if (kodeValue === '') {
+                        // Hentikan pengiriman form
+                        event.preventDefault();
+
+                        // Tambahkan kelas error untuk efek getar
+                        kodeInput.classList.add('is-invalid');
+
+                        // Beri tahu pengguna (bisa juga menggunakan elemen HTML, bukan alert)
+                        alert('Nomor pengaduan tidak boleh kosong.');
+
+                        // Hapus kelas error setelah animasi selesai agar efek bisa berjalan lagi
+                        setTimeout(() => {
+                            kodeInput.classList.remove('is-invalid');
+                        }, 400);
+                    }
+                });
+            }
+        });
+    </script>
 
 </body>
 

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\StatusPengaduan;
+use App\Events\StatusPengaduanUpdated;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pengaduan extends Model
 {
@@ -20,8 +22,9 @@ class Pengaduan extends Model
         'regency_id',
         'uraian',
         'pelapor_id',
-        'nomor_registrasi', 
-        'status',           
+        'nomor_registrasi',
+        'status',
+        'user_id',
     ];
 
     protected static function booted()
@@ -31,9 +34,14 @@ class Pengaduan extends Model
             $pengaduan->nomor_registrasi = 'REG' . mt_rand(10000000, 99999999);
 
             // Status default
-            $pengaduan->status = 'Draft';
+            $pengaduan->status = 'Open';
         });
     }
+
+    protected $casts = [
+        'status' => StatusPengaduan::class,
+        'waktu_kejadian' => 'datetime',
+    ];
 
     public function files()
     {
@@ -58,5 +66,36 @@ class Pengaduan extends Model
     public function unit()
     {
         return $this->belongsTo(Unit::class, 'unit_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function riwayat()
+    {
+        // Pastikan nama method 'riwayat' sudah benar
+        return $this->hasMany(RiwayatPengaduan::class)->orderBy('created_at', 'desc');
+    }
+
+    // Di dalam class Pengaduan
+    public function ubahStatus(StatusPengaduan $status, ?string $catatan, ?int $adminId): void
+    {
+        $statusLama = $this->status->value;
+        $statusBaru = $status->value;
+
+        // 1. Update status record utama
+        $this->update(['status' => $statusBaru]);
+
+        // 2. Buat entri riwayat baru
+        $riwayat = $this->riwayat()->create([
+            'status' => $statusBaru,
+            'deskripsi' => $catatan ?? "Status diubah dari {$statusLama} menjadi {$statusBaru}.",
+            'user_id' => $adminId,
+        ]);
+
+        // 3. Siarkan event
+        broadcast(new StatusPengaduanUpdated($riwayat))->toOthers();
     }
 }

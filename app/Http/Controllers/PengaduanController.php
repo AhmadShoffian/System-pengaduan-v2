@@ -15,7 +15,11 @@ class PengaduanController extends Controller
     public function index()
     {
         // $pengaduan = Pengaduan::all();
-        $pengaduan = Pengaduan::orderBy('waktu_kejadian', 'desc')->get();
+        // $pengaduan = Pengaduan::orderBy('waktu_kejadian', 'desc')->get();
+        $pengaduan = Pengaduan::where('user_id', auth()->id())
+            ->orderBy('waktu_kejadian', 'desc')
+            ->get();
+
         return view('frontend.home.pengaduan.index', compact('pengaduan'));
     }
 
@@ -41,20 +45,16 @@ class PengaduanController extends Controller
             'regency_id'       => 'required|exists:regencies,id',
             'uraian'           => 'required|string',
         ]);
-
-
         $request->session()->put('pengaduan', $validatedData);
 
         return redirect()->route('pengaduan.create.step.two');
     }
-
 
     public function getRegencies($province_id)
     {
         $regencies = Regency::where('province_id', $province_id)->get();
         return response()->json($regencies);
     }
-
 
     public function createStepTwo(Request $request)
     {
@@ -72,13 +72,11 @@ class PengaduanController extends Controller
         }
 
         $pelaporList = session()->get('pelapor', []);
-
         // Ambil semua input
         $nama    = $request->input('nama');
         $nip     = $request->input('nip');
         $unit    = $request->input('unit');
         $jabatan = $request->input('jabatan');
-
         // Kalau semua field kosong → otomatis jadi Anonim
         if (empty($nama) && empty($nip) && empty($unit) && empty($jabatan)) {
             $pelaporList[] = [
@@ -95,17 +93,13 @@ class PengaduanController extends Controller
                 'unit'    => 'required|string|max:255',
                 'jabatan' => 'required|string|max:255',
             ]);
-
             $pelaporList[] = $validated;
         }
-
         // Simpan kembali ke session
         session()->put('pelapor', $pelaporList);
-
         return redirect()->route('pengaduan.create.step.two')
             ->with('success', 'Data pelapor berhasil ditambahkan ke session');
     }
-
 
     public function postStepTwo(Request $request)
     {
@@ -114,31 +108,24 @@ class PengaduanController extends Controller
             'alamat' => 'nullable|string',
             'telepon' => 'nullable|string',
         ]);
-
         // Ambil data pelapor dari session, kalau belum ada buat array kosong
         $pelaporList = session()->get('pelapor', []);
-
         // Tambahkan pelapor baru ke list
         $pelaporList[] = $pelapor;
-
         // Simpan kembali ke session
         session()->put('pelapor', $pelaporList);
-
         return redirect()->back()->with('success', 'Pelapor berhasil ditambahkan.');
     }
 
     public function removePelapor(Request $request, $index)
     {
         $pelapor = $request->session()->get('pelapor', []);
-
         if (isset($pelapor[$index])) {
             unset($pelapor[$index]);
             $pelapor = array_values($pelapor); // reindex ulang
             $request->session()->put('pelapor', $pelapor);
-
             return redirect()->back()->with('success', 'Pelapor berhasil dihapus.');
         }
-
         return redirect()->back()->with('error', 'Pelapor tidak ditemukan.');
     }
 
@@ -153,38 +140,33 @@ class PengaduanController extends Controller
         $request->validate([
             'lampiran.*' => 'file|max:20480|mimes:pdf,doc,docx',
         ]);
-
         $sessionPengaduan = $request->session()->get('pengaduan');
         $pelaporList = $request->session()->get('pelapor', []);
-
-        $pengaduan = Pengaduan::create($sessionPengaduan);
-
+        // $pengaduan = Pengaduan::create($sessionPengaduan);
+        $pengaduan = Pengaduan::create(array_merge(
+            $sessionPengaduan,
+            ['user_id' => auth()->id()] // otomatis ambil user login
+        ));
         foreach ($pelaporList as $p) {
             $pengaduan->pelapor()->create($p);
         }
-
         $lampiranSession = $request->session()->get('pengaduan_lampiran', []);
 
         foreach ($lampiranSession as $file) {
             $filename = $file['file_name'];
             $tempPath = $file['file_tmp'];
-
             $finalPath = 'lampiran_pengaduan/' . $filename;
-
             if (Storage::exists($tempPath)) {
                 Storage::move($tempPath, 'public/' . $finalPath);
             }
-
             Pengaduanfile::create([
                 'pengaduan_id' => $pengaduan->id,
                 'file_path' => $finalPath,
                 'file_name' => $filename,
             ]);
         }
-
         // Hapus session
         $request->session()->forget(['pengaduan', 'pelapor', 'pengaduan_lampiran']);
-
         return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil dibuat!');
     }
 
@@ -193,9 +175,7 @@ class PengaduanController extends Controller
         $request->validate([
             'lampiran.*' => 'required|file|max:20480|mimes:pdf,doc,docx',
         ]);
-
         $lampiranSession = session()->get('pengaduan_lampiran', []);
-
         if ($request->hasFile('lampiran')) {
             foreach ($request->file('lampiran') as $file) {
                 $lampiranSession[] = [
@@ -204,9 +184,7 @@ class PengaduanController extends Controller
                 ];
             }
         }
-
         session()->put('pengaduan_lampiran', $lampiranSession);
-
         return redirect()->back()->with('success', 'Lampiran berhasil ditambahkan ke session.');
     }
 
@@ -219,7 +197,6 @@ class PengaduanController extends Controller
             unset($lampiranSession[$index]);
             session()->put('pengaduan_lampiran', array_values($lampiranSession));
         }
-
         return redirect()->back()->with('success', 'Lampiran berhasil dihapus.');
     }
 
@@ -229,10 +206,8 @@ class PengaduanController extends Controller
         $provinces = Province::all();
         $regencies = Regency::all();
         $units     = Unit::all();
-
         // Simpan sementara di session
         $request->session()->put('pengaduan_edit', $pengaduan->toArray());
-
         return view('frontend.home.edit-step-one', compact('pengaduan', 'provinces', 'regencies', 'units'));
     }
 
@@ -248,9 +223,7 @@ class PengaduanController extends Controller
             'regency_id' => 'required|exists:regencies,id',
             'uraian' => 'required|string',
         ]);
-
         $request->session()->put('pengaduan_edit', $validatedData);
-
         return redirect()->route('pengaduan.edit.step.two', $id);
     }
 
@@ -266,21 +239,17 @@ class PengaduanController extends Controller
     // }
 
     public function editStepTwo(Request $request, $id)
-{
-    $pengaduan = Pengaduan::findOrFail($id);
-
-    // Ambil dari session kalau ada
-    $pelapor = $request->session()->get('pelapor_edit');
-
-    if (!$pelapor) {
-        // Kalau session kosong, isi dari DB
-        $pelapor = $pengaduan->pelapor()->get()->toArray();
-        $request->session()->put('pelapor_edit', $pelapor);
+    {
+        $pengaduan = Pengaduan::findOrFail($id);
+        // Ambil dari session kalau ada
+        $pelapor = $request->session()->get('pelapor_edit');
+        if (!$pelapor) {
+            // Kalau session kosong, isi dari DB
+            $pelapor = $pengaduan->pelapor()->get()->toArray();
+            $request->session()->put('pelapor_edit', $pelapor);
+        }
+        return view('frontend.home.edit-step-two', compact('pengaduan', 'pelapor'));
     }
-
-    return view('frontend.home.edit-step-two', compact('pengaduan', 'pelapor'));
-}
-
 
     public function postEditStepTwo(Request $request, $id)
     {
@@ -298,62 +267,21 @@ class PengaduanController extends Controller
         return redirect()->back()->with('success', 'Data pelapor berhasil diperbarui.');
     }
 
-//   public function postEditStepTwo(Request $request, $id)
-// {
-//     // Tidak pakai required, cukup nullable
-//     $validated = $request->validate([
-//         'nama'    => 'nullable|string|max:255',
-//         'nip'     => 'nullable|string|max:100',
-//         'unit'    => 'nullable|string|max:255',
-//         'jabatan' => 'nullable|string|max:255',
-//     ]);
-
-//     // Jika semua kosong → simpan Anonim + null
-//     if (
-//         empty($validated['nama']) &&
-//         empty($validated['nip']) &&
-//         empty($validated['unit']) &&
-//         empty($validated['jabatan'])
-//     ) {
-//         $validated['nama'] = 'Anonim';
-//         $validated['nip'] = null;
-//         $validated['unit'] = null;
-//         $validated['jabatan'] = null;
-//     }
-
-//     // Jika hanya nama kosong → Anonim
-//     if (empty($validated['nama'])) {
-//         $validated['nama'] = 'Anonim';
-//     }
-
-//     $pelaporList = session()->get('pelapor_edit', []);
-//     $pelaporList[] = $validated;
-//     session()->put('pelapor_edit', $pelaporList);
-
-//     return redirect()->back()->with('success', 'Data pelapor berhasil ditambahkan.');
-// }
-
-
-public function removePelaporSession($id, $index)
-{
-    $pelaporList = session()->get('pelapor_edit', []);
-    if (isset($pelaporList[$index])) {
-        unset($pelaporList[$index]);
-        session()->put('pelapor_edit', array_values($pelaporList)); // reindex array
+    public function removePelaporSession($id, $index)
+    {
+        $pelaporList = session()->get('pelapor_edit', []);
+        if (isset($pelaporList[$index])) {
+            unset($pelaporList[$index]);
+            session()->put('pelapor_edit', array_values($pelaporList)); // reindex array
+        }
+        return redirect()->back()->with('success', 'Pelapor berhasil dihapus.');
     }
-
-    return redirect()->back()->with('success', 'Pelapor berhasil dihapus.');
-}
-
-
-
 
     public function postEditStepThree(Request $request, $id)
     {
         $request->validate([
             'lampiran.*' => 'file|max:20480|mimes:pdf,doc,docx',
         ]);
-
         $pengaduan = Pengaduan::findOrFail($id);
 
         // Update data pengaduan dari session
@@ -461,7 +389,9 @@ public function removePelaporSession($id, $index)
 
     public function show($id)
     {
-        $pengaduan = Pengaduan::with(['files', 'unit', 'pelapor', 'province', 'regency'])->findOrFail($id);
+        // Pastikan 'riwayat' ada di dalam array .with()
+        $pengaduan = Pengaduan::with(['files', 'unit', 'pelapor', 'province', 'regency', 'riwayat'])
+            ->findOrFail($id);
 
         return view('frontend.home.show', compact('pengaduan'));
     }

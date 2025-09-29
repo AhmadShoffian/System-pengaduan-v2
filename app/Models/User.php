@@ -55,4 +55,9 @@ class User extends Authenticatable
 
         return $this->hasAnyRole(['admin', 'super_admin']);
     }
+
+    public function pengaduan()
+    {
+        return $this->hasMany(Pengaduan::class);
+    }
 }

@@ -8,15 +8,30 @@ use App\Models\Regency;
 use Filament\Forms\Form;
 use App\Models\Pengaduan;
 use Filament\Tables\Table;
-use Filament\Tables\Actions\DropdownAction;
+use App\Enums\StatusPengaduan;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Exports\PengaduanExport;
+use App\Models\RiwayatPengaduan;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ActionGroup;
 use Maatwebsite\Excel\Facades\Excel;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Wizard;
+use App\Events\StatusPengaduanUpdated;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Tables\Actions\ActionGroup;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\SelectColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Forms\Components\Wizard\Step;
+use Filament\Tables\Actions\DropdownAction;
+use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\PengaduanResource\Pages;
 
 class PengaduanResource extends Resource
@@ -24,7 +39,6 @@ class PengaduanResource extends Resource
     protected static ?string $model = Pengaduan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document';
-    protected static ?string $navigationGroup = 'Layanan';
 
     public static function getNavigationLabel(): string
     {
@@ -139,6 +153,7 @@ class PengaduanResource extends Resource
                                     Forms\Components\TextInput::make('file_name')
                                         ->label('Nama File (opsional)')
                                         ->maxLength(255),
+
                                 ])
                                 ->createItemButtonLabel('Tambah Lampiran')
                                 ->columnSpan(2),
@@ -163,24 +178,59 @@ class PengaduanResource extends Resource
     //             Tables\Columns\TextColumn::make('perihal')
     //                 ->label('Perihal')
     //                 ->searchable(),
-    //             Tables\Columns\TextColumn::make('status')
-    //                 ->badge()
-    //                 ->colors([
-    //                     'warning' => 'Draft',
-    //                     'info' => 'Proses',
-    //                     'success' => 'Selesai',
-    //                 ]),
+    //             Tables\Columns\SelectColumn::make('status')
+    //                 ->label('Status')
+    //                 ->options([
+    //                     'Draft' => 'Draft',
+    //                     'Proses' => 'Proses',
+    //                     'Selesai' => 'Selesai',
+    //                 ])
+    //                 ->sortable()
+    //                 ->searchable()
+    //                 ->selectablePlaceholder(false) 
+    //                 ->rules(['required']),
+
     //             Tables\Columns\TextColumn::make('waktu_kejadian')
     //                 ->label('Waktu Kejadian')
     //                 ->dateTime('d M Y H:i'),
     //         ])
     //         ->filters([])
+    //         ->headerActions([
+    //             ActionGroup::make([
+    //                 Action::make('export_excel')
+    //                     ->label('Export Excel')
+    //                     ->icon('heroicon-o-document')
+    //                     ->action(function () {
+    //                         return Excel::download(new PengaduanExport, 'pengaduan.xlsx');
+    //                     }),
+    //                 Action::make('export_pdf')
+    //                     ->label('Export PDF')
+    //                     ->icon('heroicon-o-document-text')
+    //                     ->url(route('pengaduan.export.pdf', request()->all())) // pakai route
+    //                     ->openUrlInNewTab(), // opsional agar buka di tab baru
+    //             ])->label('Export')
+    //                 ->icon('heroicon-o-document'),
+    //         ])
+
     //         ->actions([
+    //             Tables\Actions\Action::make('changeStatus')
+    //                 ->label(fn(Pengaduan $record) => $record->status === 'Draft' ? 'Proses' : ($record->status === 'Proses' ? 'Closed' : ''))
+    //                 ->icon(fn(Pengaduan $record) => $record->status === 'Draft' ? 'heroicon-o-play' : 'heroicon-o-check-circle')
+    //                 ->color(fn(Pengaduan $record) => $record->status === 'Draft' ? 'warning' : 'success')
+    //                 ->visible(fn(Pengaduan $record) => in_array($record->status, ['Draft', 'Proses']))
+    //                 ->action(function (Pengaduan $record) {
+    //                     if ($record->status === 'Draft') {
+    //                         $record->update(['status' => 'Proses']);
+    //                     } elseif ($record->status === 'Proses') {
+    //                         $record->update(['status' => 'Selesai']);
+    //                     }
+    //                 }),
+
     //             Tables\Actions\Action::make('detail')
     //                 ->label('Detail')
     //                 ->icon('heroicon-o-eye')
     //                 ->url(fn(Pengaduan $record) => route('pengaduan.show', $record))
-    //                 ->openUrlInNewTab(), // bisa diubah ke modal juga
+    //                 ->openUrlInNewTab(),
     //             Tables\Actions\EditAction::make(),
     //             Tables\Actions\DeleteAction::make(),
     //         ]);
@@ -188,70 +238,52 @@ class PengaduanResource extends Resource
 
     public static function table(Table $table): Table
     {
+
         return $table
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('nomor_registrasi')
                     ->label('Nomor Registrasi')
-                    ->sortable()
-                    ->searchable(),
+                    ->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('perihal')
                     ->label('Perihal')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->badge()
-                    ->colors([
-                        'warning' => 'Draft',
-                        'info' => 'Proses',
-                        'success' => 'Selesai',
-                    ]),
-                Tables\Columns\TextColumn::make('waktu_kejadian')
-                    ->label('Waktu Kejadian')
-                    ->dateTime('d M Y H:i'),
-            ])
-            ->filters([])
-            ->headerActions([
-                ActionGroup::make([
-                    Action::make('export_excel')
-                        ->label('Export Excel')
-                        ->icon('heroicon-o-document')
-                        ->action(function () {
-                            return Excel::download(new PengaduanExport, 'pengaduan.xlsx');
-                        }),
-                    Action::make('export_pdf')
-                        ->label('Export PDF')
-                        ->icon('heroicon-o-document-text')
-                        ->url(route('pengaduan.export.pdf', request()->all())) // pakai route
-                        ->openUrlInNewTab(), // opsional agar buka di tab baru
-                ])->label('Export')
-                    ->icon('heroicon-o-document'),
-            ])
+                    ->searchable()->limit(35)->tooltip(fn($state) => $state),
 
-
-
-            ->actions([
-                Tables\Actions\Action::make('changeStatus')
-                    ->label(fn(Pengaduan $record) => $record->status === 'Draft' ? 'Proses' : ($record->status === 'Proses' ? 'Closed' : ''))
-                    ->icon(fn(Pengaduan $record) => $record->status === 'Draft' ? 'heroicon-o-play' : 'heroicon-o-check-circle')
-                    ->color(fn(Pengaduan $record) => $record->status === 'Draft' ? 'warning' : 'success')
-                    ->visible(fn(Pengaduan $record) => in_array($record->status, ['Draft', 'Proses']))
-                    ->action(function (Pengaduan $record) {
-                        if ($record->status === 'Draft') {
-                            $record->update(['status' => 'Proses']);
-                        } elseif ($record->status === 'Proses') {
-                            $record->update(['status' => 'Selesai']);
-                        }
+                // --- PERUBAHAN UTAMA: Gunakan SelectColumn untuk status ---
+                SelectColumn::make('status')
+                    ->options(StatusPengaduan::class) // Ambil opsi dari Enum
+                    ->afterStateUpdated(function ($record, $state) {
+                        // Panggil method yang kita buat di model
+                        $record->ubahStatus(
+                            StatusPengaduan::from($state), 
+                            'Status diperbarui oleh admin dari tabel.', 
+                            auth()->id()
+                        );
+                        
+                        // Kirim notifikasi sukses
+                        Notification::make()
+                            ->title('Status berhasil diubah ke ' . $state)
+                            ->success()
+                            ->send();
                     }),
 
-                Tables\Actions\Action::make('detail')
-                    ->label('Detail')
-                    ->icon('heroicon-o-eye')
-                    ->url(fn(Pengaduan $record) => route('pengaduan.show', $record))
-                    ->openUrlInNewTab(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
+                    ->dateTime('d M Y H:i')->sortable(),
+            ])
+            ->filters([
+                SelectFilter::make('status')
+                    ->options(StatusPengaduan::class)
+            ])
+            ->actions([
+                // --- Aksi disederhanakan, hanya untuk melihat dan mengedit ---
+                ActionGroup::make([
+                    ViewAction::make()->label('Detail'),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ]),
             ]);
     }
-
 
     public static function getPages(): array
     {
