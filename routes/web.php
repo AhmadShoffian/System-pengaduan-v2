@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -63,7 +66,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/pengaduan/{id}/pelapor/remove/{index}', [PengaduanController::class, 'removePelaporSession'])
         ->name('pengaduan.pelapor.remove.session');
 
-
     Route::get('/pengaduan/{id}/edit/step-3', [PengaduanController::class, 'editStepThree'])->name('pengaduan.edit.step.three');
     Route::post('/pengaduan/{id}/edit/step-3', [PengaduanController::class, 'postEditStepThree'])->name('pengaduan.edit.step.three.post');
 
@@ -76,13 +78,33 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/pengaduan/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
     Route::delete('/pengaduan/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.destroy');
 
+    Route::get('/lacak', [PengaduanController::class, 'showLacakForm'])->name('pengaduan.lacak.form');
+    Route::post('/lacak', [PengaduanController::class, 'prosesLacak'])->name('pengaduan.lacak.proses');
+
     Route::post('/logout', function () {
         Auth::logout();
-        request()->session()->invalidate(); 
-        request()->session()->regenerateToken(); 
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
 
-        return redirect('/login'); 
+        return redirect('/login');
     })->name('logout');
+
+    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+        ->name('password.request');
+
+    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+        ->name('password.email');
+
+    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+        ->name('password.reset');
+
+    Route::post('reset-password', [NewPasswordController::class, 'store'])
+        ->name('password.store');
+
+    Route::get('/pengaduan/{pengaduan}/chat', [ChatController::class, 'show'])->name('chat.show')->middleware('auth');
+    Route::post('/pengaduan/{pengaduan}/chat/send', [ChatController::class, 'send'])->name('chat.send')->middleware('auth');
+    Route::get('/api/pengaduan/{pengaduan}/messages', [ChatController::class, 'fetchMessages'])->middleware('auth');
+
 });
 
 require __DIR__ . '/auth.php';

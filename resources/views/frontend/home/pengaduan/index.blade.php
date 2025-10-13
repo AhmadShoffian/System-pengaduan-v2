@@ -19,29 +19,106 @@
 
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <style>
+        /* Mengatur area modal body sebagai chat box */
+        .modal-body.chat-box {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            /* Jarak antar pesan sedikit lebih besar */
+            background-color: #f8f9fa;
+            /* Latar belakang abu-abu sangat terang */
+        }
+
+        /* Wadah untuk setiap baris pesan */
+        .chat-message {
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+            /* Pesan tidak terlalu lebar */
+        }
+
+        /* Gelembung pesan itu sendiri */
+        .message-bubble {
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            /* Sudut yang bulat */
+            line-height: 1.5;
+            word-wrap: break-word;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-bubble strong {
+            display: block;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .message-bubble p {
+            margin: 0;
+            font-size: 0.95em;
+        }
+
+        /* Waktu di bawah gelembung */
+        .message-meta {
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-top: 5px;
+            padding: 0 5px;
+        }
+
+        /* -- Gaya untuk pesan yang DIKIRIM (Anda/User) - KANAN -- */
+        .chat-message.sent {
+            align-self: flex-end;
+            /* Posisikan ke kanan */
+            align-items: flex-end;
+        }
+
+        .chat-message.sent .message-bubble {
+            background-color: #0d6efd;
+            /* Warna primer Bootstrap */
+            color: white;
+            border-bottom-right-radius: 0.25rem;
+            /* Sudut khas untuk "ekor" */
+        }
+
+        .chat-message.sent .message-bubble strong {
+            color: #e9ecef;
+        }
+
+        /* -- Gaya untuk pesan yang DITERIMA (Admin) - KIRI -- */
+        .chat-message.received {
+            align-self: flex-start;
+            /* Posisikan ke kiri */
+            align-items: flex-start;
+        }
+
+        .chat-message.received .message-bubble {
+            background-color: #ffffff;
+            /* Gelembung putih */
+            color: #212529;
+            border: 1px solid #e9ecef;
+            border-bottom-left-radius: 0.25rem;
+            /* Sudut khas untuk "ekor" */
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-gray-200">
     <nav class="bg-white border-b border-gray-300">
         <div class="flex justify-between items-center px-9">
-            <!-- Aumenté el padding aquí para añadir espacio en los lados -->
-            <!-- Ícono de Menú -->
             <button id="menuBtn">
                 <i class="fas fa-bars text-cyan-500 text-lg"></i>
             </button>
-
-            <!-- Logo -->
             <div class="ml-1">
                 <img src="https://www.emprenderconactitud.com/img/POC%20WCS%20(1).png" alt="logo" class="h-20 w-28">
             </div>
-
-            <!-- Ícono de Notificación y Perfil -->
             <div class="space-x-4">
                 <button>
                     <i class="fas fa-bell text-cyan-500 text-lg"></i>
                 </button>
-
-                <!-- Botón de Perfil -->
                 <button>
                     <i class="fas fa-user text-cyan-500 text-lg"></i>
                 </button>
@@ -49,11 +126,8 @@
         </div>
     </nav>
 
-    <!-- Barra lateral -->
     <div id="sideNav" class="lg:block hidden bg-white w-64 h-screen fixed rounded-none border-none">
-        <!-- Items -->
         <div class="p-4 space-y-4">
-            <!-- Inicio -->
             <a href="{{ route('pengaduan.index') }}" aria-label="dashboard"
                 class="relative px-4 py-3 flex items-center space-x-4 rounded-lg text-white bg-gradient-to-r from-sky-600 to-cyan-400">
                 <i class="fas fa-home text-white"></i>
@@ -102,7 +176,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($pengaduan as $index => $item)
+                            @foreach ($pengaduans as $index => $item)
                                 <tr class="align-middle">
                                     <td class="text-center">{{ $index + 1 }}</td>
                                     <td class="fw-semibold">{{ $item->perihal }}</td>
@@ -151,21 +225,15 @@
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                             @endif
-
-                                            {{-- <form action="{{ route('pengaduan.destroy', $item->id) }}" method="POST"
-                                                class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Yakin hapus data ini?')" title="Hapus">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </button>
-                                            </form> --}}
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#chatModal{{ $item->id }}">
+                                                Chat
+                                            </button>
                                         @endif
                                     </td>
                                 </tr>
                             @endforeach
-                            @if (count($pengaduan) == 0)
+                            @if (count($pengaduans) == 0)
                                 <tr>
                                     <td colspan="6" class="text-center text-muted py-3">
                                         Tidak ada data pengaduan
@@ -178,9 +246,60 @@
             </div>
         </div>
     </div>
-    <!-- Script  -->
+
+    <!-- Modal Chat -->
+    @foreach ($pengaduans as $pengaduan)
+        <!-- Tombol buka modal -->
+        {{-- <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+            data-bs-target="#chatModal{{ $pengaduan->id }}">
+            Chat
+        </button> --}}
+
+        <!-- Modal untuk tiap pengaduan -->
+        <div class="modal fade" id="chatModal{{ $pengaduan->id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Chat Pengaduan #{{ $pengaduan->id }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="chat-messages-{{ $pengaduan->id }}" class="mb-3"
+                            style="max-height:400px; overflow-y:auto; border:1px solid #ddd; padding:10px;">
+                        </div>
+
+                        <form class="chat-form" data-id="{{ $pengaduan->id }}" method="POST"
+                            action="{{ route('chat.send', $pengaduan) }}">
+                            @csrf
+                            <div class="input-group">
+                                <input type="text" name="body" class="form-control"
+                                    placeholder="Tulis pesan..." required>
+                                <button class="btn btn-primary" type="submit">Kirim</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            })
+        </script>
+    @endif
+
     <script>
-        // Agregar lógica para mostrar/ocultar la navegación lateral al hacer clic en el ícono de menú
         const menuBtn = document.getElementById('menuBtn');
         const sideNav = document.getElementById('sideNav');
 
@@ -205,7 +324,95 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // fungsi load messages per pengaduan
+            function loadMessages(pengaduanId) {
+                fetch(`/api/pengaduan/${pengaduanId}/messages`)
+                    .then(response => response.json())
+                    .then(messages => {
+                        const chatMessages = document.getElementById(`chat-messages-${pengaduanId}`);
+                        chatMessages.innerHTML = '';
+                        messages.forEach(message => {
+                            const messageElement = document.createElement('div');
+                            messageElement.classList.add('mb-2');
+                            messageElement.innerHTML = `
+                                <div class="p-2 rounded-lg ${message.user_id === {{ auth()->id() }} 
+                                    ? 'bg-blue-500 text-white text-right' 
+                                    : 'bg-gray-200 text-black text-left'}">
+                                    <strong>${message.user ? message.user.name : 'Unknown'}</strong><br>
+                                    <p>${message.body}</p>
+                                    <small class="text-xs">${formatDate(message.created_at)}</small>
+                                </div>
+                            `;
+                            chatMessages.appendChild(messageElement);
+                        });
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    });
+            }
+
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleString('id-ID', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+
+
+            // setiap modal ketika ditampilkan → load pesan
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('shown.bs.modal', function() {
+                    let pengaduanId = this.id.replace("chatModal", "");
+                    loadMessages(pengaduanId);
+                });
+            });
+
+            // kirim pesan tanpa reload
+            document.querySelectorAll('.chat-form').forEach(form => {
+                form.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    let pengaduanId = this.dataset.id;
+                    let formData = new FormData(this);
+
+                    fetch(this.action, {
+                            method: "POST",
+                            headers: {
+                                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                            },
+                            body: formData
+                        })
+                        .then(() => {
+                            this.reset();
+                            loadMessages(pengaduanId);
+                        });
+                });
+            });
+        });
+    </script>
+    <script>
+        // Cek apakah ada session 'success' dari controller
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+            });
+        @endif
+
+        // Cek apakah ada session 'error' dari controller
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Akses Ditolak!',
+                text: '{{ session('error') }}', // Pesan dari controller akan muncul di sini
+            });
+        @endif
+    </script>
 </body>
 
 </html>
-

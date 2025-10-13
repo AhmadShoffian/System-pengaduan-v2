@@ -23,7 +23,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POC WCS</title>
+    <title>ISI | Whistleblowing System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
@@ -128,12 +128,22 @@
                                         </span>
                                     @break
 
+                                    @case('Ditolak')
+                                        <span class="px-2 py-1 text-xs font-semibold text-red-800 bg-red-100 rounded-full">
+                                            {{ $pengaduan->status }}
+                                        </span>
+                                    @break
+
                                     @default
                                         <span class="px-2 py-1 text-xs font-semibold text-gray-800 bg-gray-100 rounded-full">
                                             {{ $pengaduan->status->value ?? 'Draft' }}
                                         </span>
                                 @endswitch
                             </span>
+                        </div>
+                        <div class="flex">
+                            <span class="text-gray-600 w-40">Alasan ditolak:</span>
+                            <span>{{ $pengaduan->alasan_tolak ?? 'N/A' }}</span>
                         </div>
                         <div class="flex">
                             <span class="text-gray-600 w-40">Sumber:</span>
@@ -356,7 +366,8 @@
 
             // Dengarkan di channel privat
             Echo.private(`pengaduan.${pengaduanId}`)
-                .listen('StatusPengaduanUpdated', (e) => { // Pastikan nama event sesuai (.status.updated jika menggunakan broadcastAs)
+                .listen('StatusPengaduanUpdated', (
+                e) => { // Pastikan nama event sesuai (.status.updated jika menggunakan broadcastAs)
                     console.log('Update dari Reverb diterima!', e);
                     tambahkanRiwayatKeTampilan(e.riwayat);
                 });

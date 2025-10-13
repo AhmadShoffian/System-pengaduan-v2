@@ -8,27 +8,47 @@ use App\Models\Province;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use App\Models\Pengaduanfile;
+use App\Jobs\SendPengaduanEmailJob;
 use Illuminate\Support\Facades\Storage;
 
 class PengaduanController extends Controller
 {
+    // public function index()
+    // {
+    //     // $pengaduan = Pengaduan::all();
+    //     // $pengaduan = Pengaduan::orderBy('waktu_kejadian', 'desc')->get();
+    //     $pengaduan = Pengaduan::where('user_id', auth()->id())
+    //         ->orderBy('waktu_kejadian', 'desc')
+    //         ->get();
+
+    //     return view('frontend.home.pengaduan.index', compact('pengaduan'));
+    // }
+
     public function index()
     {
-        // $pengaduan = Pengaduan::all();
-        // $pengaduan = Pengaduan::orderBy('waktu_kejadian', 'desc')->get();
-        $pengaduan = Pengaduan::where('user_id', auth()->id())
-            ->orderBy('waktu_kejadian', 'desc')
-            ->get();
+        $pengaduans = Pengaduan::with('messages.user')->where('user_id', auth()->id())->get();
 
-        return view('frontend.home.pengaduan.index', compact('pengaduan'));
+        return view('frontend.home.pengaduan.index', compact('pengaduans'));
     }
+
 
     public function createStepOne(Request $request)
     {
+        $statusBlokir = ['open', 'proses', 'draft'];
+
+        $adaPengaduanAktif = Pengaduan::where('user_id', auth()->id())
+            ->whereIn('status', $statusBlokir)
+            ->exists();
+        if ($adaPengaduanAktif) {
+            // Redirect ke halaman index pengaduan milik user dengan pesan error
+            return redirect()->route('pengaduan.index')
+                ->with('error', 'Anda tidak dapat membuat pengaduan baru karena masih memiliki pengaduan yang sedang aktif.');
+        }
         $pengaduan = $request->session()->get('pengaduan');
         $provinces = Province::all();
         $regencies = Regency::all();
         $units     = Unit::all();
+
 
         return view('frontend.home.create-step-one', compact('pengaduan', 'provinces', 'regencies', 'units'));
     }
@@ -165,7 +185,7 @@ class PengaduanController extends Controller
                 'file_name' => $filename,
             ]);
         }
-        // Hapus session
+        dispatch(new SendPengaduanEmailJob($pengaduan->id, auth()->user()->email));        // Hapus session
         $request->session()->forget(['pengaduan', 'pelapor', 'pengaduan_lampiran']);
         return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil dibuat!');
     }
@@ -387,14 +407,23 @@ class PengaduanController extends Controller
         return redirect()->back()->with('success', 'Lampiran berhasil dihapus.');
     }
 
+    // public function show($id)
+    // {
+    //     // Pastikan 'riwayat' ada di dalam array .with()
+    //     $pengaduan = Pengaduan::with(['files', 'unit', 'pelapor', 'province', 'regency', 'riwayat'])
+    //         ->findOrFail($id);
+
+    //     return view('frontend.home.show', compact('pengaduan'));
+    // }
+
     public function show($id)
     {
-        // Pastikan 'riwayat' ada di dalam array .with()
         $pengaduan = Pengaduan::with(['files', 'unit', 'pelapor', 'province', 'regency', 'riwayat'])
             ->findOrFail($id);
 
         return view('frontend.home.show', compact('pengaduan'));
     }
+
 
     public function destroy($id)
     {
@@ -410,5 +439,21 @@ class PengaduanController extends Controller
         }
         $pengaduan->delete();
         return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil dihapus.');
+    }
+
+    // di dalam method prosesLacak di PengaduanController.php
+
+    public function prosesLacak(Request $request)
+    {
+        $request->validate([
+            'kode_pengaduan' => 'required|string|max:255',
+        ]);
+        $nomorRegistrasi = trim($request->input('kode_pengaduan'));
+        $pengaduan = Pengaduan::where('nomor_registrasi', $nomorRegistrasi)->first();
+        if ($pengaduan) {
+            return view('frontend.home.show', ['pengaduan' => $pengaduan]);
+        } else {
+            return back()->with('error', 'Nomor pengaduan tidak ditemukan. Mohon periksa kembali.');
+        }
     }
 }

@@ -33,8 +33,8 @@ class Pengaduan extends Model
             // Nomor registrasi acak 8 digit dengan prefix
             $pengaduan->nomor_registrasi = 'REG' . mt_rand(10000000, 99999999);
 
-            // Status default
-            $pengaduan->status = 'Open';
+            // [PERBAIKAN] Status default menggunakan Enum
+            $pengaduan->status = StatusPengaduan::Open; // Ganti 'Open' dengan case Enum Anda
         });
     }
 
@@ -47,6 +47,12 @@ class Pengaduan extends Model
     {
         return $this->hasMany(PengaduanFile::class);
     }
+
+    // public function pelapor()
+    // {
+    //     // [PERBAIKAN KRUSIAL] Mengganti hasMany menjadi hasOne
+    //     return $this->hasOne(Pelapor::class, 'pengaduan_id');
+    // }
 
     public function pelapor()
     {
@@ -75,27 +81,28 @@ class Pengaduan extends Model
 
     public function riwayat()
     {
-        // Pastikan nama method 'riwayat' sudah benar
         return $this->hasMany(RiwayatPengaduan::class)->orderBy('created_at', 'desc');
     }
 
-    // Di dalam class Pengaduan
+    // Metode ini sudah sangat baik
     public function ubahStatus(StatusPengaduan $status, ?string $catatan, ?int $adminId): void
     {
         $statusLama = $this->status->value;
         $statusBaru = $status->value;
 
-        // 1. Update status record utama
         $this->update(['status' => $statusBaru]);
 
-        // 2. Buat entri riwayat baru
         $riwayat = $this->riwayat()->create([
             'status' => $statusBaru,
             'deskripsi' => $catatan ?? "Status diubah dari {$statusLama} menjadi {$statusBaru}.",
             'user_id' => $adminId,
         ]);
 
-        // 3. Siarkan event
         broadcast(new StatusPengaduanUpdated($riwayat))->toOthers();
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class)->orderBy('created_at', 'asc');
     }
 }

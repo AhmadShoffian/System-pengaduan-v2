@@ -12,6 +12,7 @@ enum StatusPengaduan: string implements HasColor, HasIcon, HasLabel
     case Open = 'Open';
     case Proses = 'Proses';
     case Selesai = 'Selesai';
+    case Ditolak = 'Ditolak';
 
     public function getLabel(): string
     {
@@ -25,6 +26,7 @@ enum StatusPengaduan: string implements HasColor, HasIcon, HasLabel
             self::Open => 'info',
             self::Proses => 'warning',
             self::Selesai => 'success',
+            self::Ditolak => 'danger',
         };
     }
 
@@ -35,6 +37,7 @@ enum StatusPengaduan: string implements HasColor, HasIcon, HasLabel
             self::Open => 'heroicon-o-envelope-open',
             self::Proses => 'heroicon-o-arrow-path',
             self::Selesai => 'heroicon-o-check-circle',
+            self::Ditolak => 'heroicon-o-x-circle', 
         };
     }
 }

@@ -3,6 +3,10 @@
 <html>
 
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/LOGO-ISI.svg') }}">
+    <title> ISI | Sign In</title>
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/Loopple/loopple-public-assets@main/motion-tailwind/motion-tailwind.css"
         rel="stylesheet">
@@ -13,7 +17,8 @@
         <div class="flex justify-center w-full h-full my-auto xl:gap-14 lg:justify-normal md:gap-5 draggable">
             <div class="flex items-center justify-center w-full lg:p-12">
                 <div class="flex items-center xl:p-10">
-                    <form action="{{ route('signin.check') }}" method="POST" class="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl">
+                    <form action="{{ route('signin.check') }}" method="POST"
+                        class="flex flex-col w-full h-full pb-6 text-center bg-white rounded-3xl">
                         @csrf
                         <h3 class="mb-3 text-4xl font-extrabold text-dark-grey-900">Sign In</h3>
                         <p class="mb-4 text-grey-700">Enter your email and password</p>
@@ -46,7 +51,8 @@
                                 </div>
                                 <span class="ml-3 text-sm font-normal text-grey-900">Keep me logged in</span>
                             </label>
-                            <a href="javascript:void(0)" class="mr-4 text-sm font-medium text-purple-blue-500">Forget
+                            <a href="{{ route('password.request') }}"
+                                class="mr-4 text-sm font-medium text-purple-blue-500">Forget
                                 password?</a>
                         </div>
                         <button
@@ -60,4 +66,32 @@
         </div>
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session('success'))
+    <script>
+        Swal.fire({
+            title: 'Berhasil!',
+            text: "{{ session('success') }}",
+            icon: 'success',
+            showConfirmButton: false, 
+            timer: 3000, 
+            timerProgressBar: true
+        });
+    </script>
+@endif
+
+@if (session('error'))
+    <script>
+        Swal.fire({
+            title: 'Gagal!',
+            text: "{{ session('error') }}",
+            icon: 'error',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true
+        });
+    </script>
+@endif
+
 <html>

@@ -19,3 +19,8 @@ Broadcast::channel('pengaduan.{pengaduan}', function (User $user, Pengaduan $pen
     // Izinkan user jika dia pemilik pengaduan atau seorang admin
     return $user->id === $pengaduan->user_id || $user->isAdmin();
 });
+
+Broadcast::channel('chat.{pengaduanId}', function ($user, $pengaduanId) {
+    $pengaduan = Pengaduan::find($pengaduanId);
+    return $user->id === $pengaduan->user_id || $user->isAdmin();
+});

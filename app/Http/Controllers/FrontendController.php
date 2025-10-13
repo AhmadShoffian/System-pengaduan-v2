@@ -30,7 +30,8 @@ class FrontendController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/home');
+            // return redirect()->intended('/home');
+            return redirect()->intended('/home')->with('success', 'Login berhasil, selamat datang!');
         }
 
         //  if (Auth::attempt($credentials)) {

@@ -57,77 +57,201 @@
             background-color: #E43636;
             color: #fff;
         }
-    </style>
 
-    <!-- =======================================================
-  * Template Name: Gp
-  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
-  * Updated: Aug 15 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+        /* Styling untuk dropdown user di header */
+        .header .dropdown-menu {
+            margin-top: 10px;
+            /* Memberi sedikit jarak dari header */
+            min-width: 180px;
+            /* Agar lebar dropdown tidak terlalu kecil */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        /* Hanya berlaku untuk layar tablet dan mobile (di bawah 1200px) */
+        @media (max-width: 1199.98px) {
+
+            /* Kita akan mengubah urutan visual dari ikon user dan navigasi */
+
+            /* 1. Beri ikon user urutan nomor 2 */
+            .header .dropdown {
+                order: 2;
+            }
+
+            /* 2. Beri burger menu (yang ada di dalam nav) urutan nomor 3 */
+            .header .navmenu {
+                order: 3;
+            }
+
+            /* 3. (Opsional) Beri sedikit jarak antara ikon user dan burger menu */
+            .header .navmenu .mobile-nav-toggle {
+                margin-left: 10px;
+            }
+        }
+
+        /*-- Hero Section --*/
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    padding: 120px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* [PERUBAHAN] Latar belakang gradasi emas muda */
+    background: linear-gradient(135deg, #fdf8e6 0%, #fcf5d5 100%); 
+}
+
+/* Struktur pembungkus konten utama di dalam hero.
+    Memastikan semua item di dalamnya (h2, p, form, dll) rata tengah.
+*/
+.hero-content-centered {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero h2 {
+    margin: 0 0 15px 0;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #333d42; /* Warna teks gelap agar kontras */
+}
+
+.hero p {
+    margin: 0 auto 40px auto; /* Margin atas 0, samping auto (pusat), bawah 40px */
+    font-size: 19px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #555e67; /* Warna teks abu-abu gelap */
+    max-width: 700px; /* Batasi lebar paragraf agar mudah dibaca */
+}
+
+/* Form Pencarian Lacak Pengaduan */
+.lacak-pengaduan-container {
+    max-width: 600px; /* Lebar maksimal form */
+    width: 100%; /* Agar bisa responsif */
+    margin: 0 auto 30px auto; /* Margin bawah untuk jarak ke tombol */
+    padding: 0;
+    text-align: center;
+}
+
+.input-group-modern {
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* Bayangan lembut dengan latar terang */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); 
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+.input-group-modern .form-control {
+    height: 55px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    padding-left: 20px;
+    padding-right: 60px;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+}
+.input-group-modern .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);
+    outline: none;
+}
+.input-group-modern .btn-lacak {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 40px;
+    height: 40px;
+    color: #0d6efd;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+/* Tombol Buat Pengaduan */
+.btn-buat-pengaduan {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 30px;
+    border-radius: 50px;
+    background: linear-gradient(to right, #4c6ef5, #0d6efd);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-buat-pengaduan:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(13, 110, 253, 0.4);
+    color: #fff;
+}
+
+.btn-buat-pengaduan svg {
+    width: 24px;
+    height: 24px;
+}
+
+/*-- Responsive Styles --*/
+@media (max-width: 991px) { /* Tablet */
+    .hero {
+        padding: 100px 0;
+    }
+    .hero h2 {
+        font-size: 42px;
+    }
+    .hero p {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+    .hero {
+        padding: 80px 0;
+        min-height: auto; /* Biarkan tinggi menyesuaikan konten di mobile */
+    }
+    .hero h2 {
+        font-size: 32px;
+    }
+    .hero p {
+        font-size: 16px;
+    }
+    .lacak-pengaduan-container {
+        width: 90%;
+    }
+    .btn-buat-pengaduan {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+}
+    </style>
 </head>
 
 <body class="index-page">
-
     {{-- <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
+            <a href="index.html" class="logo d-flex align-items-center">
                 <h1 class="sitename">GP</h1>
                 <span>.</span>
             </a>
 
-            <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a href="#hero" class="active">Home<br></a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Cara Melapor</a></li>
-                    <li><a href="#team">FAQ</a></li>
-                    <li class="dropdown"><a href="#"><span>Dropdown</span> <i
-                                class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i
-                                        class="bi bi-chevron-down toggle-dropdown"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Dropdown 1</a></li>
-                                    <li><a href="#">Deep Dropdown 2</a></li>
-                                    <li><a href="#">Deep Dropdown 3</a></li>
-                                    <li><a href="#">Deep Dropdown 4</a></li>
-                                    <li><a href="#">Deep Dropdown 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                            <li><a href="#">Dropdown 4</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
-
-
-
-          
-                <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
-        </div>
-    </header> --}}
-
-    <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-            <!-- Logo -->
-            <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
-                <h1 class="sitename">GP</h1>
-                <span>.</span>
-            </a>
-
-            <!-- Navigation -->
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="#hero" class="active">Home<br></a></li>
@@ -141,13 +265,17 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <!-- Dropdown User -->
-            <div class="dropdown order-0 order-xl-2 ms-3 ms-xl-0">
-                <a href="#" class="d-flex align-items-center text-decoration-none" id="userDropdown">
+            <div class="dropdown ms-3 ms-xl-0">
+                <a href="#" class="d-flex align-items-center text-decoration-none" id="userDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="bi bi-person-circle fs-3 text-white"></i>
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="">Ubah Profile</a></li>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Ubah Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -156,7 +284,56 @@
                     </li>
                 </ul>
             </div>
+        </div>
+    </header> --}}
 
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+            <a href="index.html" class="logo d-flex align-items-center">
+                <h1 class="sitename">GP</h1>
+                <span>.</span>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#cara-melapor">Cara Melapor</a></li>
+                    <li><a href="#team">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-lg-none bi bi-list"></i>
+            </nav>
+
+            <div class="user-menu d-flex align-items-center">
+
+                <a href="{{ route('pengaduan.index') }}" class="btn-highlight d-none d-lg-block">Pengaduan Saya</a>
+
+                <div class="dropdown ms-3">
+                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-circle fs-4"></i>
+                        <span class="d-none d-md-block ms-2">Halo, Nama User</span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Ubah Profile</a></li>
+                        <li><a class="dropdown-item d-lg-none" href="{{ route('pengaduan.index') }}">Pengaduan Saya</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -184,13 +361,9 @@
 
 
     <main class="main">
-        <!-- Hero Section -->
-        <section id="hero" class="hero section dark-background">
-
+        {{-- <section id="hero" class="hero section dark-background">
             <img src="../assets/img/triark.jpg" alt="" data-aos="fade-in">
-
             <div class="container">
-
                 <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
                     <div>
                         <h2>Selamat datang di<br> Whistleblowing System</h2>
@@ -199,45 +372,36 @@
                             yang memiliki informasi dan ingin melaportkan suatu perbuatan berindikasi pelanggaran yang
                             terjadi di lingkungan Institut Seni Indonesia Yogyakarta.
                         </p>
-
                     </div>
                 </div> <br>
 
                 <style>
-                   
                     .lacak-pengaduan-container {
                         max-width: 700px;
-                       
+
                         margin: 60px auto;
-                      
+
                         padding: 0 15px;
                         text-align: center;
-                        /* Membuat judul dan subjudul terpusat */
                     }
-
                     .lacak-pengaduan-container .lacak-title {
                         font-size: 28px;
                         font-weight: 700;
                         color: #212529;
                         margin-bottom: 10px;
                     }
-
                     .lacak-pengaduan-container .lacak-subtitle {
                         font-size: 16px;
                         color: #6c757d;
                         margin-bottom: 25px;
                     }
-
-                    /* Kontainer untuk input dan tombol */
                     .input-group-modern {
                         position: relative;
                         display: flex;
                         align-items: center;
                         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-                        /* Shadow dipindah ke sini */
                         border-radius: 12px;
                     }
-
                     .input-group-modern .form-control {
                         height: 55px;
                         border-radius: 12px;
@@ -248,7 +412,6 @@
                         font-size: 16px;
                         transition: all 0.3s ease-in-out;
                     }
-
                     .input-group-modern .form-control:focus {
                         border-color: #0d6efd;
                         box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.2);
@@ -278,9 +441,7 @@
                         color: #0d6efd;
                     }
 
-                    /* Animasi getar untuk validasi error */
                     @keyframes shake-horizontal {
-
                         0%,
                         100% {
                             transform: translateX(0);
@@ -298,13 +459,17 @@
                     .input-group-modern .form-control.is-invalid {
                         animation: shake-horizontal 0.3s;
                         border-color: #dc3545;
-                        /* Merah untuk error */
                     }
                 </style>
 
                 <div class="lacak-pengaduan-container">
-                    <form id="lacak-form" action="#" method="POST" class="mt-4">
-                        <div class="input-group-modern">
+                    @if (session('error'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <form id="lacak-form" action="{{ route('pengaduan.lacak.proses') }}" method="POST" class="mt-4">
+                        @csrf <div class="input-group-modern">
                             <input type="text" id="kode-pengaduan" name="kode_pengaduan" class="form-control"
                                 placeholder="Masukkan Nomer Pengaduan Anda" required>
                             <button type="submit" class="btn-lacak" aria-label="Lacak">
@@ -318,8 +483,8 @@
                     <a href="{{ route('pengaduan.create.step.one') }}"
                         class="inline-flex items-center gap-2 px-8 py-4 text-lg font-normal rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 text-white shadow-lg hover:from-indigo-700 hover:to-blue-700 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-400 transition">
                         <!-- Icon -->
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 20h9m-9 0H3m9-8h9m-9 0H3m9-8h9m-9 0H3">
                             </path>
@@ -327,44 +492,57 @@
                         Buat Pengaduan
                     </a>
                 </div>
-
-
-                {{-- <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-box">
-                            <i class="bi bi-binoculars"></i>
-                            <h3><a href="">Lorem Ipsum</a></h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon-box">
-                            <i class="bi bi-bullseye"></i>
-                            <h3><a href="">Dolor Sitema</a></h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="500">
-                        <div class="icon-box">
-                            <i class="bi bi-fullscreen-exit"></i>
-                            <h3><a href="">Sedare Perspiciatis</a></h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="600">
-                        <div class="icon-box">
-                            <i class="bi bi-card-list"></i>
-                            <h3><a href="">Magni Dolores</a></h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="700">
-                        <div class="icon-box">
-                            <i class="bi bi-gem"></i>
-                            <h3><a href="">Nemos Enimade</a></h3>
-                        </div>
-                    </div>
-                </div> --}}
-
             </div>
 
-        </section>
+        </section> --}}
+
+        <section id="hero" class="hero section"> 
+    <div class="container">
+        <div class="hero-content-centered" data-aos="fade-up" data-aos-delay="100">
+
+            <h2>Selamat datang di<br> Whistleblowing System</h2>
+            <p>
+                Whistleblowing System adalah aplikasi yang disediakan oleh Institut Seni Indonesia bagi Anda
+                yang memiliki informasi dan ingin melaporkan suatu perbuatan berindikasi pelanggaran yang
+                terjadi di lingkungan Institut Seni Indonesia Yogyakarta.
+            </p>
+
+            
+            <div class="lacak-pengaduan-container">
+                @if (session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                <form id="lacak-form" action="{{ route('pengaduan.lacak.proses') }}" method="POST">
+                    @csrf
+                    <div class="input-group-modern">
+                        <input type="text" id="kode-pengaduan" name="kode_pengaduan" class="form-control"
+                            placeholder="Masukkan Nomer Pengaduan Anda" required>
+                        <button type="submit" class="btn-lacak" aria-label="Lacak">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            
+            <div class="mt-4">
+                <a href="{{ route('pengaduan.create.step.one') }}"
+                    class="btn-buat-pengaduan">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 20h9m-9 0H3m9-8h9m-9 0H3m9-8h9m-9 0H3">
+                        </path>
+                    </svg>
+                    Buat Pengaduan
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
 
         <!-- About Section -->
         <section id="about" class="about section py-12">
@@ -760,7 +938,7 @@
                 </div>
             </div>
 
-        </section>```
+        </section>
 
         <!-- Stats Section -->
         {{-- <section id="stats" class="stats section">
@@ -1447,7 +1625,6 @@
 
         <!-- Contact Section -->
         <section id="contact" class="contact section">
-
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Contact</h2>
@@ -1458,78 +1635,77 @@
 
                 <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
                     <iframe style="border:0; width: 100%; height: 270px;"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15809.53995876359!2d110.3592185590924!3d-7.854899534942918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a57a057223e7f%3A0x5027a76e356c1f0!2sPanggungharjo%2C%20Kec.%20Sewon%2C%20Kabupaten%20Bantul%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1727323719119!5m2!1sid!2sid"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
                         frameborder="0" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div><!-- End Google Maps -->
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-4">
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
+                            <i class="bi bi-geo-alt flex-shrink-0"></i>
+                            <div>
+                                <h3>Address</h3>
+                                <p>A108 Adam Street, New York, NY 535022</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
+                            <i class="bi bi-telephone flex-shrink-0"></i>
+                            <div>
+                                <h3>Call Us</h3>
+                                <p>+1 5589 55488 55</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                        <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
+                            <i class="bi bi-envelope flex-shrink-0"></i>
+                            <div>
+                                <h3>Email Us</h3>
+                                <p>info@example.com</p>
+                            </div>
+                        </div><!-- End Info Item -->
+
+                    </div>
+
+                    <div class="col-lg-8">
+                        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
+                            data-aos-delay="200">
+                            <div class="row gy-4">
+
+                                <div class="col-md-6">
+                                    <input type="text" name="name" class="form-control"
+                                        placeholder="Your Name" required="">
+                                </div>
+
+                                <div class="col-md-6 ">
+                                    <input type="email" class="form-control" name="email"
+                                        placeholder="Your Email" required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                        required="">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                                </div>
+
+                                <div class="col-md-12 text-center">
+                                    <div class="loading">Loading</div>
+                                    <div class="error-message"></div>
+                                    <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                                    <button type="submit">Send Message</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div><!-- End Contact Form -->
+
                 </div>
-            </div><!-- End Google Maps -->
-
-            <div class="row gy-4">
-
-                <div class="col-lg-4">
-                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
-                        <i class="bi bi-geo-alt flex-shrink-0"></i>
-                        <div>
-                            <h3>Address</h3>
-                            <p>A108 Adam Street, New York, NY 535022</p>
-                        </div>
-                    </div><!-- End Info Item -->
-
-                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
-                        <i class="bi bi-telephone flex-shrink-0"></i>
-                        <div>
-                            <h3>Call Us</h3>
-                            <p>+1 5589 55488 55</p>
-                        </div>
-                    </div><!-- End Info Item -->
-
-                    <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
-                        <i class="bi bi-envelope flex-shrink-0"></i>
-                        <div>
-                            <h3>Email Us</h3>
-                            <p>info@example.com</p>
-                        </div>
-                    </div><!-- End Info Item -->
-
-                </div>
-
-                <div class="col-lg-8">
-                    <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="row gy-4">
-
-                            <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name"
-                                    required="">
-                            </div>
-
-                            <div class="col-md-6 ">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email"
-                                    required="">
-                            </div>
-
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Subject"
-                                    required="">
-                            </div>
-
-                            <div class="col-md-12">
-                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                            </div>
-
-                            <div class="col-md-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                <button type="submit">Send Message</button>
-                            </div>
-
-                        </div>
-                    </form>
-                </div><!-- End Contact Form -->
-
-            </div>
 
             </div>
 
@@ -1603,10 +1779,6 @@
                 <p>© <span>Copyright</span> <strong class="px-1 sitename">GP</strong> <span>All Rights Reserved</span>
                 </p>
                 <div class="credits">
-                    <!-- All the links in the footer should remain intact. -->
-                    <!-- You can delete the links only if you've purchased the pro version. -->
-                    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                    <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
                     Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
                 </div>
             </div>
@@ -1622,7 +1794,6 @@
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
@@ -1664,6 +1835,30 @@
             }
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                title: 'Gagal!',
+                text: "{{ session('error') }}",
+                icon: 'error',
+                confirmButtonText: 'Coba lagi'
+            })
+        </script>
+    @endif
 
 </body>
 

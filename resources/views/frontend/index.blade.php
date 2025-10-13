@@ -4,13 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - Gp Bootstrap Template</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/images/LOGO-ISI.svg') }}">
+    <title>ISI | Sistem-Pengaduan</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    {{-- <link href="assets/img/favicon.png" rel="icon"> --}}
+    {{-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -37,11 +38,12 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
 </head>
 
 <body class="index-page">
 
-    <header id="header" class="header d-flex align-items-center fixed-top">
+    {{-- <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
             <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
@@ -89,12 +91,50 @@
                 <a class="btn-getstarted" href="{{ route('signup') }}">Buat Akun</a>
             </div>
         </div>
+    </header> --}}
+
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+            <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+                <img src="assets/img/logo.png" alt="Logo GP">
+                <h1 class="sitename">GP</h1>
+            </a>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="#hero" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Cara Melapor</a></li>
+                    <li><a href="#team">FAQ</a></li>
+                    <li class="dropdown"><a href="#"><span>Lainnya</span> <i
+                                class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="#">Dropdown 1</a></li>
+                            <li><a href="#">Dropdown 2</a></li>
+                            <li><a href="#">Dropdown 3</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <i class="mobile-nav-toggle d-lg-none bi bi-list"></i>
+            </nav>
+
+            <div class="auth-buttons">
+                <a class="btn-login" href="{{ route('signin') }}">Login</a>
+                <a class="btn-signup" href="{{ route('signup') }}">Buat Akun</a>
+            </div>
+
+        </div>
     </header>
+
+
 
     <main class="main">
 
         <!-- Hero Section -->
-        <section id="hero" class="hero section dark-background">
+        {{-- <section id="hero" class="hero section dark-background">
 
             <img src="assets/img/triark.jpg" alt="" data-aos="fade-in">
 
@@ -153,7 +193,38 @@
 
             </div>
 
-        </section><!-- /Hero Section -->
+        </section> --}}
+
+        <section id="home" class="hero-area style1">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-12 col-12">
+                        <div class="hero-content wow fadeInLeft" data-wow-delay=".3s">
+                            <h1>Helpdesk UPA TIK ISI Yogyakarta</h1>
+                            <p>Helpdesk UPA TIK berkomitmen untuk memberikan dukungan terkait sistem informasi, jaringan
+                                internet, perangkat keras dan lunak, serta layanan TIK lainnya guna mendukung kelancaran
+                                kegiatan akademik dan administratif.</p>
+                            <form action="{{ route('pengaduan.lacak.proses') }}" method="get" target="_blank"
+                                class="trial-form">
+                                <input type="text" name="ticket_number" id="ticket_number"
+                                    placeholder="Cari Nomor Ticket">
+                                <div class="button">
+                                    <button type="submit" class="btn">Cari</button>
+                                </div>
+                            </form>
+                            {{-- <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM"
+                        class="glightbox video-button"><i class="lni lni-play"></i><span class="text">Watch our
+                            intro video.</span></a> --}}
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-12">
+                        <div class="hero-ima    ge wow fadeInRight" data-wow-delay=".4s">
+                            <img src="{{ asset('images/Group.png') }}" alt="helpdesk">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- About Section -->
         <section id="about" class="about section">
@@ -300,12 +371,10 @@
         <!-- Services Section -->
         <section id="services" class="services section">
 
-            <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Services</h2>
-                <p>Check our Services</p>
-            </div><!-- End Section Title -->
-
+                <h2>Fitur Utama Sistem</h2>
+                <p>Kami Menjamin Keamanan dan Kerahasiaan Anda</p>
+            </div>
             <div class="container">
 
                 <div class="row gy-4">
@@ -313,89 +382,80 @@
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-activity"></i>
+                                <i class="bi bi-shield-lock"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Nesciunt Mete</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Pelaporan Anonim & Rahasia</h3>
                             </a>
-                            <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores
-                                iure perferendis tempore et consequatur.</p>
+                            <p>Identitas Anda sepenuhnya terlindungi. Anda dapat mengirimkan laporan tanpa rasa khawatir
+                                karena sistem kami menjamin kerahasiaan data pribadi Anda.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-broadcast"></i>
+                                <i class="bi bi-key-fill"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Eosle Commodi</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Keamanan Data Terenkripsi</h3>
                             </a>
-                            <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum
-                                hic non ut nesciunt dolorem.</p>
+                            <p>Semua informasi dan bukti yang Anda kirimkan dienkripsi secara end-to-end, memastikan
+                                hanya pihak berwenang yang dapat mengakses laporan Anda.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-easel"></i>
+                                <i class="bi bi-graph-up"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Ledo Markt</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Sistem Pelacakan Laporan</h3>
                             </a>
-                            <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id
-                                voluptas adipisci eos earum corrupti.</p>
+                            <p>Setelah melapor, Anda akan menerima nomor tiket unik untuk memantau status dan
+                                perkembangan penanganan laporan Anda secara transparan.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-bounding-box-circles"></i>
+                                <i class="bi bi-balance-fill"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Asperiores Commodit</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Investigasi Independen</h3>
                             </a>
-                            <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga
-                                sit provident adipisci neque.</p>
-                            <a href="service-details.html" class="stretched-link"></a>
+                            <p>Setiap laporan yang masuk akan ditangani dan ditindaklanjuti oleh tim investigasi yang
+                                independen, objektif, dan profesional.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-calendar4-week"></i>
+                                <i class="bi bi-shield-check"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Velit Doloremque</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Perlindungan Bagi Pelapor</h3>
                             </a>
-                            <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed
-                                animi at autem alias eius labore.</p>
-                            <a href="service-details.html" class="stretched-link"></a>
+                            <p>Kami berkomitmen memberikan perlindungan penuh terhadap segala bentuk intimidasi atau
+                                tindakan balasan (retaliasi) kepada pelapor.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
                         <div class="service-item position-relative">
                             <div class="icon">
-                                <i class="bi bi-chat-square-text"></i>
+                                <i class="bi bi-chat-quote-fill"></i>
                             </div>
-                            <a href="service-details.html" class="stretched-link">
-                                <h3>Dolori Architecto</h3>
+                            <a href="#" class="stretched-link">
+                                <h3>Komunikasi Dua Arah</h3>
                             </a>
-                            <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure.
-                                Corrupti recusandae ducimus enim.</p>
-                            <a href="service-details.html" class="stretched-link"></a>
+                            <p>Sistem menyediakan sarana komunikasi yang aman antara Anda dan tim investigasi untuk
+                                permintaan informasi tambahan tanpa mengungkap identitas.</p>
                         </div>
-                    </div><!-- End Service Item -->
-
+                    </div>
                 </div>
 
             </div>
 
-        </section><!-- /Services Section -->
+        </section>
 
         <!-- Call To Action Section -->
         <section id="call-to-action" class="call-to-action section dark-background">
@@ -419,385 +479,129 @@
         </section><!-- /Call To Action Section -->
 
         <!-- Portfolio Section -->
-        <section id="portfolio" class="portfolio section">
-            {{-- <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-gray-50 p-4 sm:p-6">
-            
-            </div> --}}
-             <div class="container section-title" data-aos="fade-up">
+        <section id="cara-melapor" class="portfolio section">
+
+            <div class="container section-title" data-aos="fade-up">
                 <h2>Cara Melapor</h2>
-                <p>Tata Cara Melapor</p>
+                <p>Panduan Lengkap untuk Mengajukan Pengaduan</p>
             </div>
-            <div class="container">
-                <div class="row gy-4">
-                    <div class="max-w-8xl mx-auto">
-                        <div class="shadow-xl border-0 bg-white/80 backdrop-blur-sm rounded-xl">
-                            <!-- Header -->
-                            <div class="pb-6 p-6">
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-10 h-10 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
-                                            <path d="M20 17V4H8a2 2 0 00-2 2v13" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <h2
-                                            class="text-2xl bg-gradient-to-r from-blue-700 to-blue-900 bg-clip-text text-transparent">
-                                            Cara Melapor</h2>
-                                        <p class="text-gray-500 mt-1">Panduan lengkap untuk mengajukan pengaduan</p>
-                                    </div>
+            <div class="container" data-aos="fade-up" data-aos-delay="100">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-4 p-md-5">
+
+                        <div class="row g-0 mb-3">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">1</div>
+                                <div class="border-primary mx-auto mt-2"
+                                    style="width: 2px; height: 4rem; background: linear-gradient(to bottom, #0d6efd, #e9ecef);">
                                 </div>
-                                <hr class="mt-4 border-gray-200" />
                             </div>
-        
-                            <!-- Content -->
-                            <div class="p-6 space-y-6">
-        
-                                <!-- STEP TEMPLATE -->
-                                <!-- Step {N} -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            1</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon Login -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                    <path d="M12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Login ke Sistem</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Klik tombol "Login", lalu isikan
-                                            Username dan Password Anda</p>
-                                    </div>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-box-arrow-in-right fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Login ke Sistem</h5>
                                 </div>
-        
-                                <!-- Step 2 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            2</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon User -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                                    <path d="M12 14c-4.418 0-8 1.79-8 4v2h16v-2c0-2.21-3.582-4-8-4z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Registrasi (Jika Belum Terdaftar)</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">
-                                            Jika Anda belum terdaftar, klik tombol "Register" dan isikan data diri Anda lalu
-                                            klik tombol "Register", maka Anda akan otomatis login ke Aplikasi
-                                        </p>
-                                        <ul class="mt-3 ml-11 space-y-2">
-                                            <li class="flex items-start gap-3 text-gray-600">
-                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
-                                                <span>Buat Nama Samaran (username) dan Kata Sandi (password) yang Anda ketahui
-                                                    sendiri</span>
-                                            </li>
-                                            <li class="flex items-start gap-3 text-gray-600">
-                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
-                                                <span>Gunakan nama yang unik dan tidak menggambarkan identitas Anda</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-        
-                                <!-- Step 3 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            3</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon Chat -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Akses Menu Pengaduan</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Klik menu "Pengaduan" untuk memulai
-                                            pengaduan baru</p>
-                                    </div>
-                                </div>
-        
-                                <!-- Step 4 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            4</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon File -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8l-6-6H7z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Tambah Pengaduan Baru</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Klik tombol "Tambah Pengaduan" untuk
-                                            menambahkan pengaduan baru</p>
-                                    </div>
-                                </div>
-        
-                                <!-- Step 5 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            5</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon Form -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M12 4v16m8-8H4" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Isi Form Pengaduan</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Isi form Tambah Pengaduan sesuai
-                                            informasi yang diperlukan, lalu klik tombol "Lanjut"</p>
-                                    </div>
-                                </div>
-        
-                                <!-- Step 6 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            6</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon Alert -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M12 9v2m0 4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Perhatikan Ketentuan</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Perhatikan baik-baik beberapa hal di
-                                            bawah ini</p>
-                                        <ul class="mt-3 ml-11 space-y-2">
-                                            <li class="flex items-start gap-3 text-gray-600">
-                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
-                                                <span>Semua kolom yang diberi tanda (*) wajib diisi</span>
-                                            </li>
-                                            <li class="flex items-start gap-3 text-gray-600">
-                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
-                                                <span>Pastikan informasi yang diberikan benar dan lengkap memenuhi unsur <span
-                                                        class="bg-gray-100 px-2 py-0.5 rounded border text-sm">4W +
-                                                        1H</span></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-        
-                                <!-- Step 7 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            7</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon Upload -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
-                                                    <path d="M12 12V4m0 0l-4 4m4-4l4 4" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Upload Bukti Pendukung</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Jika anda memiliki bukti dalam bentuk
-                                            file seperti foto atau dokumen lain, silahkan dilengkapi di halaman selanjutnya</p>
-                                    </div>
-                                </div>
-        
-                                <!-- Step 8 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            8</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon FileCheck -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M9 12l2 2 4-4" />
-                                                    <path d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8l-6-6H7z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Konfirmasi Lampiran</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Catatan:</p>
-                                        <ul class="mt-3 ml-11 space-y-2">
-                                            <li class="flex items-start gap-3 text-gray-600">
-                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
-                                                <span>Setelah membaca petunjuk untuk menyertakan lampiran</span>
-                                            </li>
-                                            <li class="flex items-start gap-3 text-gray-600">
-                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2"></div>
-                                                <span>Klik kotak kecil di bawah petunjuk tersebut, dan lanjutkan
-                                                    prosesnya</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-        
-                                <!-- Step 9 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            9</div>
-                                        <div class="w-0.5 h-8 bg-gradient-to-b from-blue-200 to-gray-200 mt-2"></div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon Send -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M4 4l16 8-16 8V4z" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Kirim Pengaduan</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Setelah selesai mengisi, silahkan klik
-                                            tombol "Kirim" untuk melanjutkan atau klik tombol "Hapus" untuk membatalkan proses
-                                            pelaporan anda</p>
-                                    </div>
-                                </div>
-        
-                                <!-- Step 10 -->
-                                <div class="grid grid-cols-[50px_1fr] gap-4 items-start">
-                                    <div class="flex flex-col items-center">
-                                        <div
-                                            class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white flex items-center justify-center shadow-lg font-semibold">
-                                            10</div>
-                                    </div>
-                                    <div class="pb-4">
-                                        <div class="flex items-center gap-3 mb-2">
-                                            <div
-                                                class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600">
-                                                <!-- Icon Check -->
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                                                    viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path d="M5 13l4 4L19 7" />
-                                                </svg>
-                                            </div>
-                                            <h3 class="font-semibold text-gray-900">Cetak Nomor Register</h3>
-                                        </div>
-                                        <p class="text-gray-700 leading-relaxed ml-11">Halaman berikutnya memberikan kesempatan
-                                            bagi anda yang ingin mencetak nomor register pengaduan</p>
-                                    </div>
-                                </div>
-        
-                                <!-- Important Notes -->
-                                <hr class="my-8 border-gray-200" />
-                                <div
-                                    class="rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-6">
-                                    <div class="flex items-center gap-2 mb-4">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-amber-600" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path d="M12 9v2m0 4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z" />
-                                        </svg>
-                                        <h4 class="text-lg font-semibold text-amber-800">Penting untuk Diingat</h4>
-                                    </div>
-                                    <ul class="space-y-3 text-amber-900">
-                                        <li class="flex items-start gap-3">
-                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
-                                            <span class="font-semibold">Catat dan simpan dengan baik Nama Samaran (username)
-                                                dan Kata Sandi (password)</span>
-                                        </li>
-                                        <li class="flex items-start gap-3">
-                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
-                                            <span class="font-semibold">Simpan dengan baik nomor register pengaduan dan jangan
-                                                sampai hilang untuk mengetahui status!</span>
-                                        </li>
-                                        <li class="flex items-start gap-3">
-                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
-                                            <span>Tindak lanjut pengaduan yang Anda sampaikan.</span>
-                                        </li>
-                                        <li class="flex items-start gap-3">
-                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
-                                            <span>Kementerian Kesehatan akan mengirimkan respon atas laporan Anda melalui
-                                                saluran yang telah Anda cantumkan dalam Form Pengaduan.</span>
-                                        </li>
-                                        <li class="flex items-start gap-3">
-                                            <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2"></div>
-                                            <span>Apabila pengaduan yang Anda sampaikan belum memenuhi kriteria untuk
-                                                ditindaklanjuti.</span>
-                                        </li>
-                                    </ul>
-                                </div>
-        
+                                <p class="mb-0">Klik tombol "Login", lalu isikan Username dan Password Anda yang
+                                    telah terdaftar.</p>
                             </div>
                         </div>
+
+                        <div class="row g-0 mb-3">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">2</div>
+                                <div class="border-primary mx-auto mt-2"
+                                    style="width: 2px; height: 7rem; background: linear-gradient(to bottom, #0d6efd, #e9ecef);">
+                                </div>
+                            </div>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-person-plus-fill fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Registrasi (Jika Belum Terdaftar)</h5>
+                                </div>
+                                <p>Jika belum memiliki akun, klik "Register". Isi data yang diperlukan dan pastikan
+                                    untuk:</p>
+                                <ul class="list-unstyled mt-2 ps-3">
+                                    <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>Buat
+                                        Nama Samaran (username) dan kata sandi yang unik.</li>
+                                    <li><i class="bi bi-check-circle-fill text-success me-2"></i>Hindari penggunaan
+                                        nama yang dapat mengidentifikasi diri Anda.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row g-0 mb-3">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">3</div>
+                                <div class="border-primary mx-auto mt-2"
+                                    style="width: 2px; height: 4rem; background: linear-gradient(to bottom, #0d6efd, #e9ecef);">
+                                </div>
+                            </div>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-file-earmark-plus-fill fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Isi Formulir Pengaduan</h5>
+                                </div>
+                                <p>Klik "Buat Pengaduan Baru", isi semua kolom yang wajib diisi, dan pastikan informasi
+                                    memenuhi unsur <strong>4W+1H</strong> (What, Where, When, Who, How).</p>
+                            </div>
+                        </div>
+
+                        <div class="row g-0 mb-3">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">4</div>
+                                <div class="border-primary mx-auto mt-2"
+                                    style="width: 2px; height: 4rem; background: linear-gradient(to bottom, #0d6efd, #e9ecef);">
+                                </div>
+                            </div>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-paperclip fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Unggah Bukti Pendukung</h5>
+                                </div>
+                                <p>Lampirkan file bukti seperti foto, dokumen, atau rekaman untuk memperkuat laporan
+                                    Anda.</p>
+                            </div>
+                        </div>
+
+                        <div class="row g-0">
+                            <div class="col-auto text-center">
+                                <div class="d-flex align-items-center justify-content-center bg-primary text-white rounded-circle shadow"
+                                    style="width: 45px; height: 45px; font-weight: bold; font-size: 1.1rem;">5</div>
+                            </div>
+                            <div class="col pb-4 ms-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="bi bi-send-check-fill fs-4 text-primary me-3"></i>
+                                    <h5 class="mb-0">Kirim & Simpan Nomor Registrasi</h5>
+                                </div>
+                                <p class="mb-0">Setelah selesai, klik "Kirim". **Catat dan simpan dengan baik Nomor
+                                    Registrasi** yang muncul untuk melacak status pengaduan Anda.</p>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i>
+                            <div>
+                                <h5 class="alert-heading">Penting untuk Diingat!</h5>
+                                <p class="mb-0">Selalu jaga kerahasiaan **Username, Password, dan Nomor Registrasi**
+                                    Anda. Gunakan nomor registrasi untuk memantau tindak lanjut laporan melalui sistem
+                                    ini.</p>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
         </section>
 
-
-
-
-
-
         <!-- Stats Section -->
-        <section id="stats" class="stats section">
+        {{-- <section id="stats" class="stats section">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -869,10 +673,10 @@
 
             </div>
 
-        </section><!-- /Stats Section -->
+        </section> --}}
 
         <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials section dark-background">
+        {{-- <section id="testimonials" class="testimonials section dark-background">
 
             <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
 
@@ -1007,102 +811,243 @@
 
             </div>
 
-        </section><!-- /Testimonials Section -->
+        </section> --}}
 
         <!-- Team Section -->
-        <section id="team" class="team section">
+       <section id="faq" class="faq section">
 
-            <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Team</h2>
-                <p>our Team</p>
-            </div><!-- End Section Title -->
-
+                <h2>Pertanyaan Umum (FAQ)</h2>
+                <p>Temukan jawaban atas pertanyaan umum mengenai Sistem Pelaporan Pelanggaran (Whistleblowing System)
+                    kami.</p>
+            </div>
             <div class="container">
 
-                <div class="row gy-4">
+                <div class="w-full max-w-3xl mx-auto bg-white">
+                    <div class="grid divide-y divide-neutral-200">
 
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Walter White</h4>
-                                <span>Chief Executive Officer</span>
-                            </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Apa itu Sistem Pelaporan Pelanggaran (Whistleblowing System)?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Ini adalah saluran komunikasi yang aman dan rahasia untuk melaporkan dugaan
+                                    pelanggaran hukum, peraturan perusahaan, kode etik, atau norma kesusilaan yang
+                                    terjadi di lingkungan perusahaan. Sistem ini adalah bagian dari komitmen kami untuk
+                                    menjaga integritas dan tata kelola yang baik.
+                                </p>
+                            </details>
                         </div>
-                    </div><!-- End Team Member -->
 
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
-                            </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Jenis pelanggaran apa yang bisa dilaporkan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Anda dapat melaporkan berbagai tindakan, termasuk namun tidak terbatas pada:
+                                    korupsi, penipuan (fraud), pencurian aset, penyalahgunaan wewenang, konflik
+                                    kepentingan, suap, pelanggaran keamanan dan keselamatan kerja (K3), serta pelecehan
+                                    dan diskriminasi.
+                                </p>
+                            </details>
                         </div>
-                    </div><!-- End Team Member -->
 
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>William Anderson</h4>
-                                <span>CTO</span>
-                            </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Siapa saja yang dapat membuat laporan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Seluruh pihak, baik internal (karyawan, direksi, dewan komisaris) maupun eksternal
+                                    (mitra bisnis, pemasok, konsultan, pelanggan) yang mengetahui atau mencurigai adanya
+                                    pelanggaran dapat menggunakan sistem ini.
+                                </p>
+                            </details>
                         </div>
-                    </div><!-- End Team Member -->
 
-                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up"
-                        data-aos-delay="400">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                            <div class="member-info">
-                                <h4>Amanda Jepson</h4>
-                                <span>Accountant</span>
-                            </div>
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Apakah identitas pelapor akan dirahasiakan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Ya. Perusahaan menjamin kerahasiaan penuh atas identitas pelapor. Semua laporan akan
+                                    ditangani oleh tim independen yang ditunjuk khusus untuk menjaga objektivitas dan
+                                    kerahasiaan informasi.
+                                </p>
+                            </details>
                         </div>
-                    </div><!-- End Team Member -->
 
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Bisakah saya melapor secara anonim (tanpa nama)?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Tentu. Sistem ini memungkinkan Anda untuk membuat laporan secara anonim. Namun, kami
+                                    mendorong Anda untuk memberikan identitas agar tim dapat menghubungi Anda jika
+                                    memerlukan klarifikasi atau informasi tambahan untuk memperlancar proses
+                                    investigasi.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Apakah saya akan dilindungi dari tindakan balasan (retaliasi)?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Perusahaan berkomitmen penuh untuk melindungi setiap pelapor yang beritikad baik
+                                    dari segala bentuk tindakan balasan, seperti intimidasi, pelecehan, penurunan
+                                    jabatan, atau pemecatan. Perlindungan ini dijamin dalam kebijakan perusahaan.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Bagaimana cara saya membuat laporan yang efektif?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Untuk membuat laporan yang efektif, mohon jelaskan unsur 5W+1H: **What** (apa
+                                    pelanggarannya), **Who** (siapa yang terlibat), **Where** (di mana terjadinya),
+                                    **When** (kapan terjadinya), **Why** (mengapa itu terjadi), dan **How** (bagaimana
+                                    modusnya). Sertakan juga bukti pendukung jika ada.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Bukti apa saja yang perlu saya lampirkan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Sertakan bukti relevan yang Anda miliki, seperti dokumen, email, foto, video,
+                                    rekaman, atau nama saksi lain yang mengetahui kejadian tersebut. Semakin kuat bukti
+                                    awal yang Anda berikan, semakin mudah bagi tim untuk menindaklanjuti laporan.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Apa yang terjadi setelah saya mengirimkan laporan?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Setiap laporan yang masuk akan melalui proses penelaahan awal oleh tim yang
+                                    berwenang. Jika laporan memenuhi kriteria dan didukung bukti awal yang cukup,
+                                    laporan akan dilanjutkan ke tahap investigasi lebih lanjut sesuai prosedur internal
+                                    yang berlaku.
+                                </p>
+                            </details>
+                        </div>
+
+                        <div class="py-5">
+                            <details class="group">
+                                <summary
+                                    class="flex justify-between items-center font-medium cursor-pointer list-none">
+                                    <span>Bagaimana saya bisa memantau status laporan saya?</span>
+                                    <span class="transition group-open:rotate-180">
+                                        <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </span>
+                                </summary>
+                                <p class="text-neutral-600 mt-3 group-open:animate-fadeIn">
+                                    Setelah mengirim laporan melalui sistem online, Anda akan menerima sebuah nomor
+                                    registrasi atau kode unik. Anda dapat menggunakan kode tersebut untuk masuk kembali
+                                    ke sistem dan memantau status atau perkembangan penanganan laporan Anda secara aman
+                                    dan anonim.
+                                </p>
+                            </details>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
 
-        </section><!-- /Team Section -->
+        </section>
 
         <!-- Contact Section -->
         <section id="contact" class="contact section">
