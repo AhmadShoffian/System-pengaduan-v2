@@ -32,24 +32,16 @@
             <p style="color:#374151;margin-bottom:12px;">Kepada {{ auth()->check() ? auth()->user()->name : 'Admin' }},
             </p>
             <p style="color:#374151;font-size:14px;line-height:1.5;">
-                terdapat pesan baru dari {{ $ticket->nama_lengkap }}.
+                terdapat pesan baru dari {{ $user->name }}.
             </p>
 
             <!-- Track Button -->
             <div style="margin: 24px 0; text-align: center;">
-                <a href="{{ route('permohonan.data', ['nomor_ticket' => $ticket->nomor_ticket]) }}"
-                    style="display: block;
-            width: 100%;
-            background-color: #f59e0b;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            text-align: center;
-            padding: 14px 0;
-            border-radius: 6px;
-            font-size: 16px;">
-                    Lihat Pesan masuk
+                <a href="{{ url('/admin/pengaduans/' . $user->id . '/chat') }}"
+                    style="display:block;width:100%;background-color:#f59e0b;color:#fff;text-decoration:none;font-weight:bold;text-align:center;padding:14px 0;border-radius:6px;font-size:16px;">
+                    Lihat Pesan Masuk
                 </a>
+
             </div>
 
             <!-- Terms -->
@@ -69,4 +61,3 @@
 </body>
 
 </html>
-

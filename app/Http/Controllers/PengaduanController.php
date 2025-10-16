@@ -34,7 +34,7 @@ class PengaduanController extends Controller
 
     public function createStepOne(Request $request)
     {
-        $statusBlokir = ['open', 'proses', 'draft'];
+        $statusBlokir = ['open', 'proses', 'draft','ditolak'];
 
         $adaPengaduanAktif = Pengaduan::where('user_id', auth()->id())
             ->whereIn('status', $statusBlokir)
@@ -306,8 +306,15 @@ class PengaduanController extends Controller
 
         // Update data pengaduan dari session
         $sessionPengaduan = $request->session()->get('pengaduan_edit');
+        // if ($sessionPengaduan) {
+        //     $pengaduan->update($sessionPengaduan);
+        // }
+
         if ($sessionPengaduan) {
-            $pengaduan->update($sessionPengaduan);
+            foreach ($sessionPengaduan as $key => $value) {
+                $pengaduan->{$key} = $value;
+            }
+            $pengaduan->save();
         }
 
         // Update pelapor

@@ -369,11 +369,11 @@ class PengaduanResource extends Resource
                                 ->send();
                         }),
 
-                    Action::make('chat')
-                        ->label('Chat')
-                        ->icon('heroicon-o-chat-bubble-left-right')
-                        ->color('success')
-                        ->url(fn(Pengaduan $record): string => static::getUrl('chat', ['record' => $record])),
+                    // Action::make('chat')
+                    //     ->label('Chat')
+                    //     ->icon('heroicon-o-chat-bubble-left-right')
+                    //     ->color('success')
+                    //     ->url(fn(Pengaduan $record): string => static::getUrl('chat', ['record' => $record])),
 
                     Tables\Actions\DeleteAction::make(),
                 ]),
@@ -391,7 +391,7 @@ class PengaduanResource extends Resource
             'index' => Pages\ListPengaduans::route('/'),
             'create' => Pages\CreatePengaduan::route('/create'),
             'edit' => Pages\EditPengaduan::route('/{record}/edit'),
-            'chat' => Pages\Chat::route('/{record}/chat'),
+            // 'chat' => Pages\Chat::route('/{record}/chat'),
         ];
     }
 }

@@ -1589,7 +1589,7 @@ section,
 .section-title p {
   color: var(--heading-color);
   margin: 0;
-  font-size: 36px;
+  font-size: 30px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -1601,7 +1601,7 @@ section,
     position: relative;
     padding: 100px 0; /* Menambahkan padding di atas dan bawah untuk ruang napas */
     /* Latar belakang diubah menjadi gradasi linear emas muda */
-    background: linear-gradient(to bottom right, #fdf8e6, #fcf5d5); /* Emas muda ke kuning pucat */
+    background: linear-gradient(to bottom right, #ffe78f, #fcf5d5); /* Emas muda ke kuning pucat */
     overflow: hidden;
     min-height: 100vh; /* Memastikan hero section mengisi tinggi viewport */
     display: flex;
@@ -1631,77 +1631,75 @@ section,
 }
 
 .hero-area .hero-image img {
-    max-width: 100%; /* Memastikan gambar responsif */
+    max-width: 80%; 
     height: auto;
-    display: block; /* Menghilangkan spasi bawah */
-    margin: 0 auto; /* Memusatkan gambar */
-    border-radius: 10px; /* Opsional: sedikit sudut membulat pada gambar */
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08); /* Opsional: sedikit bayangan */
+    display: block; 
+    margin: 0 auto; 
+    border-radius: 10px; 
+    /* box-shadow: 0 5px 20px rgba(0,0,0,0.08);  */
 }
 
 .hero-content {
-    /* Karena sudah di-center oleh .hero-area, ini memastikan teks di dalamnya juga di tengah */
     text-align: left;
 }
 
 .hero-content h1 {
-    font-size: 3.2rem; /* Ukuran teks lebih besar untuk judul */
+    font-size: 3.2rem; 
     font-weight: 700;
-    color: #333d42; /* Warna teks gelap agar kontras dengan latar belakang terang */
+    color: #333d42; 
     margin-bottom: 20px;
     line-height: 1.2;
 }
 
 .hero-content p {
-    font-size: 1.15rem; /* Ukuran teks paragraf disesuaikan */
-    color: #555e67; /* Warna teks agak abu-abu gelap */
-    line-height: 1.7; /* Spasi baris yang lebih baik untuk keterbacaan */
+    font-size: 1.15rem; 
+    color: #555e67; 
+    line-height: 1.7; 
     margin-bottom: 30px;
-    max-width: none; /* Batasi lebar paragraf untuk keterbacaan yang lebih baik */
+    max-width: none; 
 }
 
 .trial-form {
     display: flex;
     gap: 10px;
     align-items: center;
-    justify-content: center; /* [PERUBAHAN] Memusatkan form di dalam hero-content */
-    max-width: 500px; /* [PERUBAHAN] Batasi lebar form agar tidak terlalu besar */
-    margin: 0 auto; /* [PERUBAHAN] Memusatkan form secara horizontal */
+    justify-content: center; 
+    max-width: 500px; 
+    margin: 0 auto; 
 }
 
 .trial-form input[type="text"] {
-    padding: 14px 22px; /* Padding disesuaikan */
+    padding: 14px 22px; 
     border: 1px solid #ced4da;
-    border-radius: 8px; /* Sudut lebih lembut */
+    border-radius: 8px; 
     flex-grow: 1;
     font-size: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sedikit bayangan untuk kedalaman */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
 }
 
 .trial-form .button .btn {
-    background-color: #007bff; /* Warna biru untuk tombol */
+    background-color: #007bff; 
     color: #fff;
-    padding: 14px 30px; /* Padding disesuaikan */
+    padding: 14px 30px; 
     border: none;
-    border-radius: 8px; /* Sudut lebih lembut */
+    border-radius: 8px; 
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2); /* Bayangan untuk tombol */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2); 
 }
 
 .trial-form .button .btn:hover {
     background-color: #0056b3;
-    transform: translateY(-2px); /* Efek sedikit terangkat saat hover */
+    transform: translateY(-2px); 
 }
 
-/* Hapus atau sesuaikan aturan CSS berikut jika Anda tidak memiliki class style1, style2, style3 */
-.hero-area.style1 .hero-image img { /* Aturan ini sekarang tidak relevan karena gambar dihapus */
+.hero-area.style1 .hero-image img { 
     border-radius: 10px;
 }
 
 .hero-area.style2 {
-    background-color: #061E5C; /* Tetap pertahankan jika ada style lain yang menggunakan ini */
+    background-color: #061E5C; 
 }
 
 .hero-area.style2 .hero-content h1 {
@@ -1739,7 +1737,7 @@ section,
 .hero-area.style3 {
     background-color: #5034FC;
     padding-bottom: 0;
-    padding-top: 230px; /* Pertahankan jika style3 digunakan di tempat lain */
+    padding-top: 230px; 
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

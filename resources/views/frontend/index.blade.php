@@ -30,14 +30,105 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <style>
+        /* Styling untuk Hero Section */
+.hero-area {
+    padding: 100px 0;
+    overflow: hidden;
+    background-color: #f8f9fa; /* Warna latar yang soft */
+}
 
-    <!-- =======================================================
-  * Template Name: Gp
-  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
-  * Updated: Aug 15 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+.hero-content .hero-title {
+    font-size: 2.8rem; /* Ukuran font lebih besar */
+    font-weight: 700;
+    line-height: 1.3;
+    color: #212529; /* Warna teks gelap */
+    margin-bottom: 20px;
+}
+
+.hero-content .hero-text {
+    font-size: 1.1rem;
+    color: #6c757d; /* Warna teks abu-abu */
+    margin-bottom: 30px;
+}
+
+/* Container untuk Form Pencarian */
+.search-form-container {
+    max-width: 550px;
+}
+
+/* Form Pencarian Modern */
+.modern-search-form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background: #fff;
+    border-radius: 50px; /* Membuat bentuk kapsul */
+    padding: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Efek bayangan yang lembut */
+}
+
+.modern-search-form .search-icon {
+    position: absolute;
+    left: 25px;
+    color: #adb5bd; /* Warna ikon abu-abu */
+}
+
+.modern-search-form input[type="text"] {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 12px 20px 12px 50px; /* Padding kiri untuk memberi ruang bagi ikon */
+    font-size: 16px;
+    background: transparent;
+    width: 100%;
+}
+
+.modern-search-form .btn-search {
+    border: none;
+    background-color: #0d6efd; /* Warna biru primer */
+    color: white;
+    font-weight: 500;
+    padding: 12px 30px;
+    border-radius: 50px; /* Bentuk kapsul */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modern-search-form .btn-search:hover {
+    background-color: #0b5ed7; /* Warna biru lebih gelap saat hover */
+}
+
+/* Penyesuaian gambar agar tidak terlalu besar */
+.hero-image img {
+    max-width: 90%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Responsivitas untuk mobile */
+@media (max-width: 991px) {
+    .hero-area {
+        text-align: center;
+    }
+    .search-form-container {
+        margin: 0 auto; 
+    }
+    .hero-image {
+        margin-top: 40px;
+    }
+    .hero-content .hero-title {
+        font-size: 2.2rem;
+    }
+}
+
+        @media (max-width: 991.98px) {
+            .logo {
+                display: none !important;
+            }
+        }
+    </style>
 
 </head>
 
@@ -97,8 +188,7 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
             <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
-                <img src="assets/img/logo.png" alt="Logo GP">
-                <h1 class="sitename">GP</h1>
+                <img src="{{ asset('images/sispeng.svg') }}" alt="Logo ISI">
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -107,15 +197,15 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Cara Melapor</a></li>
-                    <li><a href="#team">FAQ</a></li>
-                    <li class="dropdown"><a href="#"><span>Lainnya</span> <i
+                    <li><a href="#faq">FAQ</a></li>
+                    {{-- <li class="dropdown"><a href="#"><span>Lainnya</span> <i
                                 class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="#">Dropdown 1</a></li>
                             <li><a href="#">Dropdown 2</a></li>
                             <li><a href="#">Dropdown 3</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-lg-none bi bi-list"></i>
@@ -196,35 +286,36 @@
         </section> --}}
 
         <section id="home" class="hero-area style1">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-12 col-12">
-                        <div class="hero-content wow fadeInLeft" data-wow-delay=".3s">
-                            <h1>Helpdesk UPA TIK ISI Yogyakarta</h1>
-                            <p>Helpdesk UPA TIK berkomitmen untuk memberikan dukungan terkait sistem informasi, jaringan
-                                internet, perangkat keras dan lunak, serta layanan TIK lainnya guna mendukung kelancaran
-                                kegiatan akademik dan administratif.</p>
-                            <form action="{{ route('pengaduan.lacak.proses') }}" method="get" target="_blank"
-                                class="trial-form">
-                                <input type="text" name="ticket_number" id="ticket_number"
-                                    placeholder="Cari Nomor Ticket">
-                                <div class="button">
-                                    <button type="submit" class="btn">Cari</button>
-                                </div>
-                            </form>
-                            {{-- <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM"
-                        class="glightbox video-button"><i class="lni lni-play"></i><span class="text">Watch our
-                            intro video.</span></a> --}}
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-12">
-                        <div class="hero-ima    ge wow fadeInRight" data-wow-delay=".4s">
-                            <img src="{{ asset('images/Group.png') }}" alt="helpdesk">
-                        </div>
+    <div class="container">
+        <div class="row align-items-center">
+            {{-- Kolom Teks & Form --}}
+            <div class="col-lg-6 col-md-12 col-12">
+                <div class="hero-content wow fadeInLeft" data-wow-delay=".3s">
+                    <h1 class="hero-title">Helpdesk UPA TIK ISI Yogyakarta</h1>
+                    <p class="hero-text">
+                        Komitmen kami untuk memberikan dukungan terkait sistem informasi, jaringan, perangkat keras, dan layanan TIK lainnya guna mendukung kelancaran kegiatan akademik dan administratif.
+                    </p>
+                    
+                    {{-- Form Pencarian Modern --}}
+                    <div class="search-form-container">
+                        <form action="{{ route('pengaduan.lacak.proses') }}" method="get" class="modern-search-form">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" name="ticket_number" id="ticket_number" placeholder="Lacak status tiket Anda di sini...">
+                            <button type="submit" class="btn-search">Cari</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
+
+            {{-- Kolom Gambar --}}
+            <div class="col-lg-6 col-md-12 col-12">
+                <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
+                    <img src="{{ asset('images/Group.png') }}" alt="Helpdesk Illustration" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
         <!-- About Section -->
         <section id="about" class="about section">
@@ -814,7 +905,7 @@
         </section> --}}
 
         <!-- Team Section -->
-       <section id="faq" class="faq section">
+        <section id="faq" class="faq section">
 
             <div class="container section-title" data-aos="fade-up">
                 <h2>Pertanyaan Umum (FAQ)</h2>
@@ -1147,7 +1238,7 @@
                 <div class="row gy-4">
                     <div class="col-lg-4 col-md-6 footer-about">
                         <a href="index.html" class="logo d-flex align-items-center">
-                            <span class="sitename">GP</span>
+                            <img src="{{ asset('images/sispeng.svg') }}" alt="logo Sistem pengaduan">
                         </a>
                         <div class="footer-contact pt-3">
                             <p>A108 Adam Street</p>
@@ -1203,14 +1294,14 @@
 
         <div class="copyright">
             <div class="container text-center">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">GP</strong> <span>All Rights Reserved</span>
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">Institut Seni Indonesia Yogyakarta</strong> <span>All Rights Reserved</span>
                 </p>
                 <div class="credits">
                     <!-- All the links in the footer should remain intact. -->
                     <!-- You can delete the links only if you've purchased the pro version. -->
                     <!-- Licensing information: https://bootstrapmade.com/license/ -->
                     <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    Designed by <a href="https://isi.ac.id/">UPA TIK ISI Yogyakarta</a>
                 </div>
             </div>
         </div>

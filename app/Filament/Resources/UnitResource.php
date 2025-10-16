@@ -11,6 +11,7 @@ use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Tables\Filters\TrashedFilter;
 use App\Filament\Resources\UnitResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\UnitResource\RelationManagers;
@@ -54,12 +55,30 @@ class UnitResource extends Resource
                     ->dateTime(),
                 TextColumn::make('updated_at')
                     ->dateTime(),
+                TextColumn::make('creator.name')
+                    ->label('Dibuat oleh')
+                    ->default('-')
+                    ->sortable(),
+
+                TextColumn::make('updater.name')
+                    ->label('Diperbarui oleh')
+                    ->default('-')
+                    ->sortable(),
+                TextColumn::make('deleter.name')
+                    ->label('Dihapus oleh')
+                    ->default('-')
+                    ->sortable(),
+
+
+
             ])
             ->filters([
-                //
+                TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\RestoreAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

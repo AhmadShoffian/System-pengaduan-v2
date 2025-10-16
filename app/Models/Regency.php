@@ -11,13 +11,14 @@ namespace App\Models;
 
 use AzisHapidin\IndoRegion\Traits\RegencyTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Regency Model.
  */
 class Regency extends Model
 {
-    use RegencyTrait;
+    use RegencyTrait, SoftDeletes;
 
     /**
      * Table name.

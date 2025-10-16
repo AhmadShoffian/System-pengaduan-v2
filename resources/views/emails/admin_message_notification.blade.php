@@ -34,12 +34,12 @@
             <p style="color:#374151;margin-bottom:12px;">Kepada {{ $user->name }},</p>
             <p style="color:#374151;font-size:14px;line-height:1.5;">
                 Permohonan informasi Anda dengan nomor registrasi
-                <strong>#{{ $user->nomor_ticket }}</strong> terdapat pesan baru dari admin.
+                <strong>#{{ $chatMessage->pengaduan->nomor_registrasi }}</strong> terdapat pesan baru dari admin.
             </p>
 
             <!-- Track Button -->
             <div style="margin: 24px 0; text-align: center;">
-                <a href="{{ url('/tickets/' . $ticket->id) }}"
+                <a href="{{ url('/tickets/' . $chatMessage->pengaduan->id) }}"
                     style="display: block;
             width: 100%;
             background-color: #f59e0b;

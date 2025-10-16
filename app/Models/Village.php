@@ -12,13 +12,14 @@ namespace App\Models;
 use AzisHapidin\IndoRegion\Traits\VillageTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\District;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Village Model.
  */
 class Village extends Model
 {
-    use VillageTrait;
+    use VillageTrait, SoftDeletes;
 
     /**
      * Table name.

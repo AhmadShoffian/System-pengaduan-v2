@@ -13,13 +13,14 @@ use AzisHapidin\IndoRegion\Traits\DistrictTrait;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Regency;
 use App\Models\Village;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * District Model.
  */
 class District extends Model
 {
-    use DistrictTrait;
+    use DistrictTrait, SoftDeletes;
 
     /**
      * Table name.

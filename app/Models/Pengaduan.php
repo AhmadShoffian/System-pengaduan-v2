@@ -6,10 +6,11 @@ use App\Enums\StatusPengaduan;
 use App\Events\StatusPengaduanUpdated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pengaduan extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'pengaduan';
     protected $fillable = [
