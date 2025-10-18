@@ -9,10 +9,6 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
 
-    <!-- Favicons -->
-    {{-- <link href="assets/img/favicon.png" rel="icon"> --}}
-    {{-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -32,96 +28,110 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
     <style>
         /* Styling untuk Hero Section */
-.hero-area {
-    padding: 100px 0;
-    overflow: hidden;
-    background-color: #f8f9fa; /* Warna latar yang soft */
-}
+        .hero-area {
+            padding: 100px 0;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            /* Warna latar yang soft */
+        }
 
-.hero-content .hero-title {
-    font-size: 2.8rem; /* Ukuran font lebih besar */
-    font-weight: 700;
-    line-height: 1.3;
-    color: #212529; /* Warna teks gelap */
-    margin-bottom: 20px;
-}
+        .hero-content .hero-title {
+            font-size: 2.8rem;
+            /* Ukuran font lebih besar */
+            font-weight: 700;
+            line-height: 1.3;
+            color: #212529;
+            /* Warna teks gelap */
+            margin-bottom: 20px;
+        }
 
-.hero-content .hero-text {
-    font-size: 1.1rem;
-    color: #6c757d; /* Warna teks abu-abu */
-    margin-bottom: 30px;
-}
+        .hero-content .hero-text {
+            font-size: 1.1rem;
+            color: #6c757d;
+            /* Warna teks abu-abu */
+            margin-bottom: 30px;
+        }
 
-/* Container untuk Form Pencarian */
-.search-form-container {
-    max-width: 550px;
-}
+        /* Container untuk Form Pencarian */
+        .search-form-container {
+            max-width: 550px;
+        }
 
-/* Form Pencarian Modern */
-.modern-search-form {
-    display: flex;
-    align-items: center;
-    position: relative;
-    background: #fff;
-    border-radius: 50px; /* Membuat bentuk kapsul */
-    padding: 8px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Efek bayangan yang lembut */
-}
+        /* Form Pencarian Modern */
+        .modern-search-form {
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: #fff;
+            border-radius: 50px;
+            /* Membuat bentuk kapsul */
+            padding: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            /* Efek bayangan yang lembut */
+        }
 
-.modern-search-form .search-icon {
-    position: absolute;
-    left: 25px;
-    color: #adb5bd; /* Warna ikon abu-abu */
-}
+        .modern-search-form .search-icon {
+            position: absolute;
+            left: 25px;
+            color: #adb5bd;
+            /* Warna ikon abu-abu */
+        }
 
-.modern-search-form input[type="text"] {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    padding: 12px 20px 12px 50px; /* Padding kiri untuk memberi ruang bagi ikon */
-    font-size: 16px;
-    background: transparent;
-    width: 100%;
-}
+        .modern-search-form input[type="text"] {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            padding: 12px 20px 12px 50px;
+            /* Padding kiri untuk memberi ruang bagi ikon */
+            font-size: 16px;
+            background: transparent;
+            width: 100%;
+        }
 
-.modern-search-form .btn-search {
-    border: none;
-    background-color: #0d6efd; /* Warna biru primer */
-    color: white;
-    font-weight: 500;
-    padding: 12px 30px;
-    border-radius: 50px; /* Bentuk kapsul */
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        .modern-search-form .btn-search {
+            border: none;
+            background-color: #0d6efd;
+            /* Warna biru primer */
+            color: white;
+            font-weight: 500;
+            padding: 12px 30px;
+            border-radius: 50px;
+            /* Bentuk kapsul */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.modern-search-form .btn-search:hover {
-    background-color: #0b5ed7; /* Warna biru lebih gelap saat hover */
-}
+        .modern-search-form .btn-search:hover {
+            background-color: #0b5ed7;
+            /* Warna biru lebih gelap saat hover */
+        }
 
-/* Penyesuaian gambar agar tidak terlalu besar */
-.hero-image img {
-    max-width: 90%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
+        /* Penyesuaian gambar agar tidak terlalu besar */
+        .hero-image img {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 
-/* Responsivitas untuk mobile */
-@media (max-width: 991px) {
-    .hero-area {
-        text-align: center;
-    }
-    .search-form-container {
-        margin: 0 auto; 
-    }
-    .hero-image {
-        margin-top: 40px;
-    }
-    .hero-content .hero-title {
-        font-size: 2.2rem;
-    }
-}
+        /* Responsivitas untuk mobile */
+        @media (max-width: 991px) {
+            .hero-area {
+                text-align: center;
+            }
+
+            .search-form-container {
+                margin: 0 auto;
+            }
+
+            .hero-image {
+                margin-top: 40px;
+            }
+
+            .hero-content .hero-title {
+                font-size: 2.2rem;
+            }
+        }
 
         @media (max-width: 991.98px) {
             .logo {
@@ -198,14 +208,6 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#portfolio">Cara Melapor</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    {{-- <li class="dropdown"><a href="#"><span>Lainnya</span> <i
-                                class="bi bi-chevron-down toggle-dropdown"></i></a>
-                        <ul>
-                            <li><a href="#">Dropdown 1</a></li>
-                            <li><a href="#">Dropdown 2</a></li>
-                            <li><a href="#">Dropdown 3</a></li>
-                        </ul>
-                    </li> --}}
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-lg-none bi bi-list"></i>
@@ -222,100 +224,39 @@
 
 
     <main class="main">
-
-        <!-- Hero Section -->
-        {{-- <section id="hero" class="hero section dark-background">
-
-            <img src="assets/img/triark.jpg" alt="" data-aos="fade-in">
-
-            <div class="container">
-
-                <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
-                    <div>
-                        <h2>Selamat datang di<br> Whistleblowing System</h2>
-                        <p style="font-size: 20px; line-height: 1.5;">Whistleblowing System adalah apilkasi yang
-                            disediakan oleh Institut Seni Indonesia bagi Anda
-                            yang memiliki informasi dan ingin melaportkan suatu perbuatan berindikasi pelanggaran yang
-                            terjadi di lingkungan Institut Seni Indonesia Yogyakarta. <br><br>
-                            Anda tidak perlu khawatir terungkapnya identitas diri anda karena Institut Seni Indonesia
-                            Yogyakarta MERAHASIAKAN IDENTITAS DIRI ANDA sebagai whistleblower. ISI Yogyakarta menghargai
-                            informasi yang Anda laporkan. Fokus kami kepada materi informasi yang Anda laporkan.</p>
-                    </div>
-                </div> <br>
-
-                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
-
-                    <a href="#" class="btn btn-primary">Buat Akun</a>
-                </div>
-
-                <div class="row gy-4 mt-5 justify-content-center" data-aos="fade-up" data-aos-delay="200">
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-box">
-                            <i class="bi bi-binoculars"></i>
-                            <h3><a href="">Lorem Ipsum</a></h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon-box">
-                            <i class="bi bi-bullseye"></i>
-                            <h3><a href="">Dolor Sitema</a></h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="500">
-                        <div class="icon-box">
-                            <i class="bi bi-fullscreen-exit"></i>
-                            <h3><a href="">Sedare Perspiciatis</a></h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="600">
-                        <div class="icon-box">
-                            <i class="bi bi-card-list"></i>
-                            <h3><a href="">Magni Dolores</a></h3>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-4" data-aos="fade-up" data-aos-delay="700">
-                        <div class="icon-box">
-                            <i class="bi bi-gem"></i>
-                            <h3><a href="">Nemos Enimade</a></h3>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </section> --}}
-
         <section id="home" class="hero-area style1">
-    <div class="container">
-        <div class="row align-items-center">
-            {{-- Kolom Teks & Form --}}
-            <div class="col-lg-6 col-md-12 col-12">
-                <div class="hero-content wow fadeInLeft" data-wow-delay=".3s">
-                    <h1 class="hero-title">Helpdesk UPA TIK ISI Yogyakarta</h1>
-                    <p class="hero-text">
-                        Komitmen kami untuk memberikan dukungan terkait sistem informasi, jaringan, perangkat keras, dan layanan TIK lainnya guna mendukung kelancaran kegiatan akademik dan administratif.
-                    </p>
-                    
-                    {{-- Form Pencarian Modern --}}
-                    <div class="search-form-container">
-                        <form action="{{ route('pengaduan.lacak.proses') }}" method="get" class="modern-search-form">
-                            <i class="fas fa-search search-icon"></i>
-                            <input type="text" name="ticket_number" id="ticket_number" placeholder="Lacak status tiket Anda di sini...">
-                            <button type="submit" class="btn-search">Cari</button>
-                        </form>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-12 col-12">
+                        <div class="hero-content wow fadeInLeft" data-wow-delay=".3s">
+                            <h1 class="hero-title">Helpdesk UPA TIK ISI Yogyakarta</h1>
+                            <p class="hero-text">
+                                Komitmen kami untuk memberikan dukungan terkait sistem informasi, jaringan, perangkat
+                                keras, dan layanan TIK lainnya guna mendukung kelancaran kegiatan akademik dan
+                                administratif.
+                            </p>
+
+                            <div class="search-form-container">
+                                <form action="{{ route('pengaduan.lacak.proses') }}" method="get"
+                                    class="modern-search-form">
+                                    <i class="fas fa-search search-icon"></i>
+                                    <input type="text" name="ticket_number" id="ticket_number"
+                                        placeholder="Lacak status tiket Anda di sini...">
+                                    <button type="submit" class="btn-search">Cari</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Kolom Gambar --}}
+                    <div class="col-lg-6 col-md-12 col-12">
+                        <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
+                            <img src="{{ asset('images/Group.png') }}" alt="Helpdesk Illustration" class="img-fluid">
+                        </div>
                     </div>
                 </div>
             </div>
-
-            {{-- Kolom Gambar --}}
-            <div class="col-lg-6 col-md-12 col-12">
-                <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
-                    <img src="{{ asset('images/Group.png') }}" alt="Helpdesk Illustration" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- About Section -->
         <section id="about" class="about section">
@@ -354,72 +295,7 @@
 
             </div>
 
-        </section><!-- /About Section -->
-
-        <!-- Clients Section -->
-        {{-- <section id="clients" class="clients section">
-
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-                <div class="swiper init-swiper">
-                    <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 2,
-                  "spaceBetween": 40
-                },
-                "480": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 60
-                },
-                "640": {
-                  "slidesPerView": 4,
-                  "spaceBetween": 80
-                },
-                "992": {
-                  "slidesPerView": 6,
-                  "spaceBetween": 120
-                }
-              }
-            }
-          </script>
-                    <div class="swiper-wrapper align-items-center">
-                        <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid"
-                                alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid"
-                                alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid"
-                                alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid"
-                                alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid"
-                                alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid"
-                                alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid"
-                                alt=""></div>
-                        <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid"
-                                alt=""></div>
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-
-            </div>
-
-        </section> --}}
-
+        </section>
         <!-- Features Section -->
         <section id="features" class="features section">
 
@@ -457,7 +333,7 @@
 
             </div>
 
-        </section><!-- /Features Section -->
+        </section>
 
         <!-- Services Section -->
         <section id="services" class="services section">
@@ -567,7 +443,7 @@
                 </div>
             </div>
 
-        </section><!-- /Call To Action Section -->
+        </section>
 
         <!-- Portfolio Section -->
         <section id="cara-melapor" class="portfolio section">
@@ -1294,7 +1170,8 @@
 
         <div class="copyright">
             <div class="container text-center">
-                <p>© <span>Copyright</span> <strong class="px-1 sitename">Institut Seni Indonesia Yogyakarta</strong> <span>All Rights Reserved</span>
+                <p>© <span>Copyright</span> <strong class="px-1 sitename">Institut Seni Indonesia Yogyakarta</strong>
+                    <span>All Rights Reserved</span>
                 </p>
                 <div class="credits">
                     <!-- All the links in the footer should remain intact. -->
